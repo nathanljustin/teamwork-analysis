@@ -46,3 +46,8 @@ None.
 Currently does not work.
 
 ## References
+
+### Database Setup
+
+* https://stackoverflow.com/questions/2098131/rails-how-to-list-database-tables-objects-using-the-rails-console
+* https://www.justinweiss.com/articles/creating-easy-readable-attributes-with-activerecord-enums/
