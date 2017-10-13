@@ -48,7 +48,7 @@ if __name__ == "__main__":
     parser.add_argument(
         '--team-size', 
         type=int, 
-        help='Desired size for each team',
+        help='Desired size for each team, creates larger teams if not an even division',
         dest='team_size',
     )
     parser.add_argument(
