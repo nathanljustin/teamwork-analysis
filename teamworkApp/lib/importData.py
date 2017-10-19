@@ -55,7 +55,7 @@ def insertAnswerData(csvFileName):
 	tableName: table where data is to be stored
 	col1: starting column
 	col2: ending column"""
-
+# THIS WORKS SO REFINE THIS
 	timestamps, studentResponses = processAnswerData(csvFileName)
 	count = 0
 	for students in studentResponses:
@@ -68,13 +68,6 @@ def insertAnswerData(csvFileName):
 			conn.commit()
 			conn.close()
 			count += 1
-	conn = sqlite3.connect(DB)
-	c = conn.cursor()
-
-	c.execute('SELECT * FROM answers')
-
-	conn.commit()
-	conn.close()
 
 # generate a bunch of data and shove it into answers
 def main():
