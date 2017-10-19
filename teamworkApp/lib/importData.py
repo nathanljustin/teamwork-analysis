@@ -55,7 +55,7 @@ def insertAnswerData(csvFileName):
 	tableName: table where data is to be stored
 	col1: starting column
 	col2: ending column"""
-# THIS WORKS SO REFINE THIS
+# TODO(maeve): refine this whole file
 	timestamps, studentResponses = processAnswerData(csvFileName)
 	count = 0
 	for students in studentResponses:
