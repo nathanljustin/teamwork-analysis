@@ -30,8 +30,8 @@ def processAnswerData(csvFileName):
 		timestamps = []
 		studentResponses = []
 		for student in studentData:
-			timestamps += student[0]
 			teamworkResponses = student[1:73]
+			timestamps += [student[0]]
 			listOfStrings = []
 			enummedResponses = []
 			count = 0
@@ -59,15 +59,17 @@ def insertAnswerData(csvFileName):
 	timestamps, studentResponses = processAnswerData(csvFileName)
 	count = 0
 	for students in studentResponses:
+		questionCount = 0
 		studentId = 'S' + str(count)
 		for response in students:
-			to_db = [response, timestamps[count], timestamps[count], studentId, count]
+			to_db = [response, timestamps[count], timestamps[count], studentId, questionCount]
 			conn = sqlite3.connect(DB)
 			c = conn.cursor()
 			c.execute('INSERT INTO answers (value, created_at, updated_at, student_id, question) VALUES (?, ?, ?, ?, ?);', to_db)
 			conn.commit()
 			conn.close()
-			count += 1
+			questionCount += 1
+		count += 1
 
 # generate a bunch of data and shove it into answers
 def main():
