@@ -43,7 +43,7 @@ def processAnswerData(csvFileName):
 			enummedResponses = []
 			count = 0
 			while (count < 72):
-				aggregateResponses += [teamworkResponses[count] +
+				aggregateResponses += [teamworkResponses[count]   +
 								       teamworkResponses[count+1] +
 								       teamworkResponses[count+2] +
 								       teamworkResponses[count+3]]
@@ -66,25 +66,25 @@ def findStyle(expandedResponses):
 	for resp in expandedResponses:
 		# this pattern is based on the teamwork survey scoring scheme
 		if tracker == 0:
-			contributor += int(resp[0]) # a
+			contributor  += int(resp[0]) # a
 			collaborator += int(resp[1]) # b
 			communicator += int(resp[2]) # c
-			challenger += int(resp[3]) # d
+			challenger   += int(resp[3]) # d
 		elif tracker == 1:
-			contributor += int(resp[3]) # d
+			contributor  += int(resp[3]) # d
 			collaborator += int(resp[0]) # a
 			communicator += int(resp[1]) # b
-			challenger += int(resp[2]) # c
+			challenger   += int(resp[2]) # c
 		elif tracker == 2:
-			contributor += int(resp[2]) # c
+			contributor  += int(resp[2]) # c
 			collaborator += int(resp[3]) # d
 			communicator += int(resp[0]) # a
-			challenger += int(resp[1]) # b
+			challenger   += int(resp[1]) # b
 		elif tracker == 3:
-			contributor += int(resp[1]) # b
+			contributor  += int(resp[1]) # b
 			collaborator += int(resp[2]) # c
 			communicator += int(resp[3]) # d
-			challenger += int(resp[0]) # a
+			challenger   += int(resp[0]) # a
 		else:
 			tracker = -1
 		tracker += 1
@@ -98,44 +98,75 @@ def findStyle(expandedResponses):
 	else:
 		return Style(3).name
 
+def insertStudentData(csvFileName):
+	"""Using data from the csv file given, insertStudentData finds how many
+	students are in the file and places them into the student table"""
+
+	expandedResponses, timestamps, studentResponses = processAnswerData(csvFileName)
+	student_to_db = []
+	count = 0
+
+	for students in studentResponses:
+		studentId = 'S' + str(count)
+		now = datetime.now().isoformat()
+		student_to_db += [(findStyle(expandedResponses[count]), studentId, 0, timestamps[count], now)]
+		count += 1
+
+
+	print("Inserting data into 'students'")
+	conn = sqlite3.connect(DB)
+	c = conn.cursor()
+	# insert student data for each student
+	c.executemany('INSERT INTO students (style, name, team, created_at, updated_at) VALUES (?, ?, ?, ?, ?);', student_to_db)
+	conn.commit()
+	conn.close()
 
 def insertAnswerData(csvFileName):
 	"""Import data from the csv file into answers and students
 	within out SQLite3 database.
 	csvFileName: name (possibly including path) of the
 		with the desired data"""
+
+	# fetch the names of the students from the table
+	conn = sqlite3.connect(DB)
+	c = conn.cursor()
+	c.execute('SELECT name FROM students;')
+	names = c.fetchall()
+	conn.commit()
+	conn.close()
+
+	students = []
+	for name in names:
+		students += [name[0]]
+
 	expandedResponses, timestamps, studentResponses = processAnswerData(csvFileName)
 	to_db = []
-	student_to_db = []
+	# student_to_db = []
 	count = 0
 
-	for students in studentResponses:
+	for stdnt in studentResponses:
 		questionCount = 0
-		studentId = 'S' + str(count)
 
-		for response in students:
+		for response in stdnt:
 			to_db += [(response, timestamps[count], timestamps[count], questionCount)]
 			questionCount += 1
 
 		now = datetime.now().isoformat()
-		student_to_db += [(findStyle(expandedResponses[count]), 0, timestamps[count], now)]
 		count += 1
 
 	print("Inserting data into 'answers'")
-	print("Inserting data into 'students'")
 
 	conn = sqlite3.connect(DB)
 	c = conn.cursor()
 	# insert student data for each question for the student
 	c.executemany('INSERT INTO answers (value, created_at, updated_at,question) VALUES (?, ?, ?, ?);', to_db)
-	# insert student data for each student
-	c.executemany('INSERT INTO students (style, team, created_at, updated_at) VALUES (?, ?, ?, ?);', student_to_db)
 	conn.commit()
 	conn.close()
 
 def main():
 
 	print("Inserting data")
+	insertStudentData('lib/test_spreadsheet.csv')
 	insertAnswerData('lib/test_spreadsheet.csv')
 	print("Success: Data inserted into tables!")
 
