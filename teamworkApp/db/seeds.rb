@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-students = Student.create([{name: 'Eloise Backer', style: 1}, {name: 'Ryan New', style: 0}, {name: 'Navier Leek', style: 2}])
+students = Student.create([{name: 'Eloise Backer'}, {name: 'Ryan New'}, {name: 'Navier Leek'}])
 Answer.create([
 	{question: 1, student: students.first, value: 0},
 	{question: 2, student: students.first, value: 0},
