@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  year: 1
+  semester: 1
+  section: 1
+  course_code: MyString
+
+two:
+  name: MyString
+  year: 1
+  semester: 1
+  section: 1
+  course_code: MyString
