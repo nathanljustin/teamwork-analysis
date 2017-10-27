@@ -1,3 +1,11 @@
+# resources:
+
+# muddersOnRails()
+# Maeve Murphy October 12, 2017
+# Last updated: 10-20-2017
+
+# imports data from the .csv file holding responses from the teamwork survey
+
 import sqlite3
 import csv
 from datetime import datetime, date, time
