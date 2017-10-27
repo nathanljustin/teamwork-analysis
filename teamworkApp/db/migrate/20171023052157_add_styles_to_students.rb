@@ -5,5 +5,6 @@ class AddStylesToStudents < ActiveRecord::Migration[5.1]
     add_column :students, :challenger, :integer
     add_column :students, :contributor, :integer
     add_column :students, :team_id, :integer
+    add_column :students, :username, :string
   end
 end
