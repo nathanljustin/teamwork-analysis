@@ -73,3 +73,8 @@ Currently does not work.
 
 * https://github.com/halostatue/rubypython
 * https://mixandgo.com/blog/how-to-use-link_to-in-rails
+
+### Ruby on Rails
+
+* https://www.tutorialspoint.com/ruby-on-rails/rails-controllers.htm
+* http://guides.rubyonrails.org/action_controller_overview.html#methods-and-actions
