@@ -74,10 +74,12 @@ def process_answer_data(csv_filename):
 			while (count < EXPANDED_QUESTIONS):
 				# grab the next four digits and "glue" them together
 					# to creat the expanded response
-				expanded_responses.append(teamwork_responses[count]   +
-								       teamwork_responses[count+1] +
-								       teamwork_responses[count+2] +
-								       teamwork_responses[count+3])
+				expanded_responses.append(
+									teamwork_responses[count]   +
+								    teamwork_responses[count+1] +
+								    teamwork_responses[count+2] +
+								    teamwork_responses[count+3]
+									)
 				# increment by to not quadruple count characters
 				count += 4
 			# find the corresponding value to this expanded response
@@ -165,13 +167,13 @@ def list_answer_data(student_dict):
 		question_count       = 0
 
 		for response in enummed_responses:
-			answer_to_db.append(
-			(response,
-			student_dict[student][0],
-			now,
-			primary_keys[count],
-			question_count)
-			)
+			answer_to_db.append((
+				response,
+				student_dict[student][0],
+				now,
+				primary_keys[count],
+				question_count
+			))
 			question_count += 1
 		count += 1
 	return answer_to_db
@@ -204,15 +206,15 @@ def list_style_data(student_dict):
 		# (communicator, collaborator, challenger, contributor) = find_scores(primary_keys[count])
 		created_at   = student_dict[student][0]
 		student_id   = primary_keys[count]
-		style_to_db.append(
-			(student_id,
-			communicator,
-			collaborator,
-			challenger,
-			contributor,
-			created_at,
-			now)
-			)
+		style_to_db.append((
+				student_id,
+				communicator,
+				collaborator,
+				challenger,
+				contributor,
+				created_at,
+				now
+			))
 		count += 1
 
 	return style_to_db
