@@ -1,6 +1,6 @@
 # muddersOnRails()
 # Maeve Murphy October 12, 2017
-# Last updated: 10-27-2017
+# Last updated: 10-28-2017
 
 # imports data from the .csv file holding responses from the teamwork survey
 
@@ -74,16 +74,16 @@ def process_answer_data(csv_filename):
 			while (count < EXPANDED_QUESTIONS):
 				# grab the next four digits and "glue" them together
 					# to creat the expanded response
-				expanded_responses += [teamwork_responses[count]   +
+				expanded_responses.append(teamwork_responses[count]   +
 								       teamwork_responses[count+1] +
 								       teamwork_responses[count+2] +
-								       teamwork_responses[count+3] ]
+								       teamwork_responses[count+3])
 				# increment by to not quadruple count characters
 				count += 4
 			# find the corresponding value to this expanded response
 			for resp in expanded_responses:
 				ans = get_answer(resp)
-				enummed_responses += [ans]
+				enummed_responses.append(ans)
 
 			# the timestamps are saved in the first column of the .csv file
 			timestamp = student[0]
@@ -126,7 +126,7 @@ def find_style(expanded_responses):
 		tracker += 1
 	return communicator, collaborator, challenger, contributor
 
-def liststudent_data(student_dict):
+def list_student_data(student_dict):
 	"""Using data from the csv file given, insertstudent_data finds how many
 	students are in the file and places them into the student table"""
 	student_to_db = []
@@ -136,7 +136,7 @@ def liststudent_data(student_dict):
 		# TODO(Maeve): add functionality to get which team the student is on.
 			# This will require more functionality on the teams side
 		# currently name and username are the same
-		student_to_db += [(student, student_dict[student][0], now, student)]
+		student_to_db.append((student, student_dict[student][0], now, student))
 	return student_to_db
 
 def list_answer_data(student_dict):
@@ -165,13 +165,13 @@ def list_answer_data(student_dict):
 		question_count       = 0
 
 		for response in enummed_responses:
-			answer_to_db += [
+			answer_to_db.append(
 			(response,
 			student_dict[student][0],
 			now,
 			primary_keys[count],
 			question_count)
-			]
+			)
 			question_count += 1
 		count += 1
 	return answer_to_db
@@ -204,7 +204,7 @@ def list_style_data(student_dict):
 		# (communicator, collaborator, challenger, contributor) = find_scores(primary_keys[count])
 		created_at   = student_dict[student][0]
 		student_id   = primary_keys[count]
-		style_to_db += [
+		style_to_db.append(
 			(student_id,
 			communicator,
 			collaborator,
@@ -212,14 +212,14 @@ def list_style_data(student_dict):
 			contributor,
 			created_at,
 			now)
-			]
+			)
 		count += 1
 
 	return style_to_db
 
 def execute_insert(csv_filename):
 	student_dict   = process_answer_data(csv_filename)
-	student_to_db = liststudent_data(student_dict)
+	student_to_db = list_student_data(student_dict)
 	print("Inserting .csv information into 'students'...")
 	conn = sqlite3.connect(DB)
 	c = conn.cursor()
@@ -229,8 +229,8 @@ def execute_insert(csv_filename):
 	conn.close()
 	print("Success.")
 	# answer and style depend on information being stored in students so we
-		# can only call list_answer_data and liststudent_data after
-		# liststudent_data's information has been inserted
+		# can only call list_answer_data and list_student_data after
+		# list_student_data's information has been inserted
 	answer_to_db  = list_answer_data(student_dict)
 	style_to_db   = list_style_data(student_dict)
 	print("Inserting data into 'answers' and 'styles'...")
@@ -247,9 +247,9 @@ def execute_insert(csv_filename):
 	print("Success.")
 
 def main():
-
+	# TODO: remove this and other print statements when moving to Ruby
 	print("Inserting data")
-	execute_insert('lib/test_spreadsheet.csv')
+	execute_insert('test/test_spreadsheet.csv')
 	print("Success: Data inserted into 3 tables!")
 
 if __name__ == "__main__":
