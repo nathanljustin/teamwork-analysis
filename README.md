@@ -62,3 +62,12 @@ Currently does not work.
 * https://startbootstrap.com/template-overviews/bare/
 * https://github.com/twbs/bootstrap-sass
 * https://github.com/thoughtbot/high_voltage
+
+### Github
+
+* https://github.com/Kunena/Kunena-Forum/wiki/Create-a-new-branch-with-git-and-manage-branches
+
+### Python Integration
+
+* https://github.com/halostatue/rubypython
+* https://mixandgo.com/blog/how-to-use-link_to-in-rails
