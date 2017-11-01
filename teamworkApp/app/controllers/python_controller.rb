@@ -2,10 +2,13 @@ class PythonController < ApplicationController
     def evaluateAnswers
         require "rubypython"
         RubyPython.start
-        # Might be good to have a graph object that we create for the ones that produce a graph. 
-        
+        sys = RubyPython.import(sys)
+        sys.path.append('#{Rails.root}/lib')
+        #There is something up here with the packages within evaluate answers (do we need to have all of python within our rails package cause uhh ...?)
+        enum = RubyPython.import(enum)
+        evalAnswers = RubyPython.import("evaluateAnswers")
         # Not positive that this path will actually work. Rails is weird about where it likes its files to be. We may have to move the python files or find a new way to direct the path.
-        fileName = RubyPython.import("/lib/evaluateAnswers.py")
+        #fileName = RubyPython.import("/lib/evaluateAnswers.py")
         # TODO: I don't know how is best to run all of these methods. perhaps use an exec instead of a main? that was we can run the whole file? 
         p fileName.main(args).rubify
         RubyPython.stop
@@ -41,8 +44,8 @@ class PythonController < ApplicationController
         require "rubypython"
         RubyPython.start
         sys = RubyPython.import("sys")
-        sys.path.append('#{Rails.root}/lib')
-        overallPie = RubyPython.import("overallPie")
+        sys.path.append('./lib')
+        overallPie = RubyPython.import("overallPie.py")
         # TODO: I don't know how is best to run all of these methods. perhaps use an exec instead of a main? that was we can run the whole file? 
         RubyPython.stop
     end
