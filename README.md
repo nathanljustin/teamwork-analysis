@@ -74,6 +74,10 @@ Currently does not work.
 
 * https://github.com/halostatue/rubypython
 * https://mixandgo.com/blog/how-to-use-link_to-in-rails
+* http://effbot.org/pyfaq/how-do-i-create-a-pyc-file.htm
+* https://www.codesd.com/item/using-the-rubypython-gem-in-ruby-on-rails-how-do-you-call-a-python-script-from-the-lib-folder.html
+* http://www.rubydoc.info/gems/rubypython/0.5.1/RubyPython
+* https://github.com/halostatue/rubypython/issues/14
 
 ### Ruby on Rails
 
