@@ -40,9 +40,10 @@ class PythonController < ApplicationController
     def overallPie
         require "rubypython"
         RubyPython.start
-        fileName = RubyPython.import("/lib/overallPie.py")
+        sys = RubyPython.import("sys")
+        sys.path.append('#{Rails.root}/lib')
+        overallPie = RubyPython.import("overallPie")
         # TODO: I don't know how is best to run all of these methods. perhaps use an exec instead of a main? that was we can run the whole file? 
-        p fileName.main(args).rubify
         RubyPython.stop
     end
 
