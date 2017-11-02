@@ -24,7 +24,7 @@ def student_graph(student_id):
     if len(scores) != 0:
         scores = scores[1:5]
     else:
-        scores = [0]
+        scores = [0] * 4
         print("Error: Could not find any data on this student")
     
     conn.commit()
