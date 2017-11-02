@@ -22,13 +22,14 @@ def getStylesData():
 
     # Get types from scores
     # If multiple types, all counted
-    data = [10] * len(Style)
+    data = [0.0] * len(Style)
 
     for i in range(len(contributor)):
         studentScores = [contributor[i], collaborator[i], communicator[i], challenger[i]]
         types = getType(studentScores)
+        length = len(types)
         for j in range(len(types)):
-            data[j] += 1
+            data[j] += 1.0/length
     
     return data
 
