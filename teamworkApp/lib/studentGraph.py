@@ -20,12 +20,13 @@ def student_graph(student_id):
         [student_id,],
     )
 
-    scores = c.fetchall()
-    if len(scores) != 0:
-        scores = scores[1:5]
-    else:
-        scores = [0] * 4
+    dbData = c.fetchall()
+
+    scores = [0] * 4 
+    if len(dbData) == 0:
         print("Error: Could not find any data on this student")
+    else:
+        scores = dbData[0][2:6]
     
     conn.commit()
     conn.close()

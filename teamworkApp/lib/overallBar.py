@@ -25,11 +25,13 @@ def getStylesData():
     data = [0.0] * len(Style)
 
     for i in range(len(contributor)):
-        studentScores = [contributor[i], collaborator[i], communicator[i], challenger[i]]
+        studentScores = [contributor[i][0], collaborator[i][0], communicator[i][0], challenger[i][0]]
+        print(studentScores)
         types = getType(studentScores)
+        print(types)
         length = len(types)
         for j in range(len(types)):
-            data[j] += 1.0/length
+            data[types[j]] += 1.0/length
     
     return data
 
