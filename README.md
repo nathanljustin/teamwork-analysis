@@ -51,6 +51,8 @@ Currently does not work.
 
 * https://stackoverflow.com/questions/2098131/rails-how-to-list-database-tables-objects-using-the-rails-console
 * https://www.justinweiss.com/articles/creating-easy-readable-attributes-with-activerecord-enums/
+* http://www.tomjewett.com/dbdesign/dbdesign.php?page=manymany.php
+* http://guides.rubyonrails.org/v3.2.8/migrations.html
 
 
 ### Python Scripts
