@@ -4,9 +4,4 @@ Rails.application.routes.draw do
   get '/python/overallBar/' => 'python#overallBar'
   get '/studentGraph/' => 'high_voltage/pages#show', id: 'studentshow'
   get '/overallBar/' => 'high_voltage/pages#show', id: 'overallshow'
-  resources :python do
-    collection do
-      get :overallPie
-    end
-  end
 end
