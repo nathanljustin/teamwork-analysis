@@ -13,10 +13,7 @@ def getStylesData():
     # Get all scores
     conn = sqlite3.connect(DB)
     c = conn.cursor()
-    contributor = c.execute('SELECT contributor FROM styles').fetchall()
-    collaborator = c.execute('SELECT collaborator FROM styles').fetchall()
-    communicator = c.execute('SELECT communicator FROM styles').fetchall()
-    challenger = c.execute('SELECT challenger FROM styles').fetchall()
+    scores = c.execute('SELECT * FROM styles').fetchall()
     conn.commit()
     conn.close()
 
@@ -24,18 +21,17 @@ def getStylesData():
     # If multiple types, all counted
     data = [0.0] * len(Style)
 
-    for i in range(len(contributor)):
-        studentScores = [contributor[i][0], collaborator[i][0], communicator[i][0], challenger[i][0]]
-        print(studentScores)
+    # Loop through each student, and get the types of each student
+    for i in range(len(scores)):
+        studentScores = scores[i][2:6]
         types = getType(studentScores)
-        print(types)
         length = len(types)
         for j in range(len(types)):
             data[types[j]] += 1.0/length
     
     return data
 
-if __name__ == "__main__":
+def main():
     """Gives the graph of the overall distribution of types"""
     labels = [Style(x).name for x in range(len(Style))]
     yPos = np.arange(len(labels))
@@ -47,4 +43,7 @@ if __name__ == "__main__":
     plt.title("Overall Distribution of Types")
 
     plt.savefig('tmp/overall.png', bbox_inches='tight')
+
+if __name__ == "__main__":
+    main()
     
