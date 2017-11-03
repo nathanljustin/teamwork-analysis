@@ -47,18 +47,6 @@ def student_graph(student_id):
     name = 'app/assets/images/summary' + str(student_id) + '.png'
     plt.savefig(name, bbox_inches='tight')
 
-def main(student_id):
-    """
-    parser = argparse.ArgumentParser(description="Generate graph summarizing a student's answers")
-    parser.add_argument(
-        'student_id', 
-        type=int, 
-        help='Student id for desired student graph',
-    )
-    args = parser.parse_args()
-"""
-    student_graph(student_id)
-
 if __name__ == "__main__":
-    main(1)
+    student_graph(1)
     
