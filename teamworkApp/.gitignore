@@ -25,7 +25,7 @@
 
 .byebug_history
 
-# Ignote generated images
+# Ignore generated images
 /app/assets/images/overall.png
 /app/assets/images/summary*.png
 
