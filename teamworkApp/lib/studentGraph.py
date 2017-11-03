@@ -35,17 +35,6 @@ def student_graph(student_id):
     plt.ylabel("Score")
     plt.title("Student " + str(student_id) + " Distribution of Types")
 
-    dbData = c.fetchall()
-
-    scores = [0] * 4 
-    if len(dbData) == 0:
-        print("Error: Could not find any data on this student")
-    else:
-        scores = dbData[0][2:6]
-    
-    conn.commit()
-    conn.close()
-
     # Make graph
     labels = [Style(x).name for x in range(len(Style))]
     yPos = np.arange(len(labels))

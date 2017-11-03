@@ -42,7 +42,7 @@ def main():
     plt.ylabel("Number of Students")
     plt.title("Overall Distribution of Types")
 
-    plt.savefig('tmp/overall.png', bbox_inches='tight')
+    plt.savefig('app/assets/images/overall.png', bbox_inches='tight')
 
 if __name__ == "__main__":
     main()
