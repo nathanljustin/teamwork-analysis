@@ -65,3 +65,21 @@ Currently does not work.
 * https://startbootstrap.com/template-overviews/bare/
 * https://github.com/twbs/bootstrap-sass
 * https://github.com/thoughtbot/high_voltage
+
+### Github
+
+* https://github.com/Kunena/Kunena-Forum/wiki/Create-a-new-branch-with-git-and-manage-branches
+
+### Python Integration
+
+* https://github.com/halostatue/rubypython
+* https://mixandgo.com/blog/how-to-use-link_to-in-rails
+* http://effbot.org/pyfaq/how-do-i-create-a-pyc-file.htm
+* https://www.codesd.com/item/using-the-rubypython-gem-in-ruby-on-rails-how-do-you-call-a-python-script-from-the-lib-folder.html
+* http://www.rubydoc.info/gems/rubypython/0.5.1/RubyPython
+* https://github.com/halostatue/rubypython/issues/14
+
+### Ruby on Rails
+
+* https://www.tutorialspoint.com/ruby-on-rails/rails-controllers.htm
+* http://guides.rubyonrails.org/action_controller_overview.html#methods-and-actions

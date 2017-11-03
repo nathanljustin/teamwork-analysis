@@ -35,18 +35,18 @@ def student_graph(student_id):
     plt.ylabel("Score")
     plt.title("Student " + str(student_id) + " Distribution of Types")
 
-    name = 'tmp/summary' + str(student_id) + '.png'
+    # Make graph
+    labels = [Style(x).name for x in range(len(Style))]
+    yPos = np.arange(len(labels))
+
+    plt.bar(yPos, scores, align = 'center', alpha = 0.5)
+    plt.xticks(yPos, labels)
+    plt.ylabel("Score")
+    plt.title("Student " + str(student_id) + " Distribution of Types")
+
+    name = 'app/assets/images/summary' + str(student_id) + '.png'
     plt.savefig(name, bbox_inches='tight')
 
 if __name__ == "__main__":
-
-    parser = argparse.ArgumentParser(description="Generate graph summarizing a student's answers")
-    parser.add_argument(
-        'student_id', 
-        type=int, 
-        help='Student id for desired student graph',
-    )
-    args = parser.parse_args()
-
-    student_graph(args.student_id)
-
+    student_graph(1)
+    
