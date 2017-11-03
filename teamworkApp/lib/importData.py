@@ -10,6 +10,7 @@
 
 import sqlite3
 import csv
+import sys
 from evaluateAnswers import *
 from datetime import datetime, date, time
 from enum import IntEnum
@@ -249,9 +250,10 @@ def execute_insert(csv_filename):
 	print("Success.")
 
 def main():
+	args = sys.argv
 	# TODO: remove this and other print statements when moving to Ruby
-	print("Inserting data")
-	execute_insert('test/test_spreadsheet.csv')
+	print("Inserting data)
+	execute_insert(args[1])
 	print("Success: Data inserted into 3 tables!")
 
 if __name__ == "__main__":
