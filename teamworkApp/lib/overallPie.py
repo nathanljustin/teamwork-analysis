@@ -22,7 +22,7 @@ def getStylesData():
     
     return data
 
-if __name__ == "__main__":
+def main():
     """Gives the graph of the overall distribution of types"""
     labels = [Style(x).name for x in range(len(Style))]
     data = getStylesData()
@@ -38,4 +38,7 @@ if __name__ == "__main__":
     ax1.axis('equal')
 
     plt.savefig('tmp/overall.png', bbox_inches='tight')
+
+if __name__ == "__main__":
+    main()
     

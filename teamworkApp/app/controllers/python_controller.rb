@@ -1,4 +1,5 @@
 class PythonController < ApplicationController
+
     def evaluateAnswers
         require "rubypython"
         RubyPython.start
@@ -40,22 +41,25 @@ class PythonController < ApplicationController
         RubyPython.stop
     end
 
-    def overallPie
+    def overallBar
         require "rubypython"
         RubyPython.start
         sys = RubyPython.import("sys")
         sys.path.append('./lib')
-        overallPie = RubyPython.import("overallPie.py")
-        # TODO: I don't know how is best to run all of these methods. perhaps use an exec instead of a main? that was we can run the whole file? 
+        overallBar = RubyPython.import("overallBar")
+        logger.debug overallBar.main()
         RubyPython.stop
+        redirect_to '/overallBar/'
     end
 
     def studentGraph
         require "rubypython"
         RubyPython.start
-        fileName = RubyPython.import("/lib/studentGraph.py")
-        # TODO: I don't know how is best to run all of these methods. perhaps use an exec instead of a main? that was we can run the whole file? 
-        p fileName.main(args).rubify
+        sys = RubyPython.import("sys")
+        sys.path.append('./lib')
+        studentGraph = RubyPython.import("studentGraph")
+        logger.debug studentGraph.student_graph(1)
         RubyPython.stop
+        redirect_to '/studentGraph/'
     end
 end
