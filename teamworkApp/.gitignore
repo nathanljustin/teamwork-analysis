@@ -24,3 +24,8 @@
 /yarn-error.log
 
 .byebug_history
+
+# Ignore generated images
+/app/assets/images/overall.png
+/app/assets/images/summary*.png
+

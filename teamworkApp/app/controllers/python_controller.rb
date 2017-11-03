@@ -1,4 +1,5 @@
 class PythonController < ApplicationController
+<<<<<<< HEAD
     def evaluateAnswers
         require "rubypython"
         RubyPython.start
@@ -57,5 +58,15 @@ class PythonController < ApplicationController
         # TODO: I don't know how is best to run all of these methods. perhaps use an exec instead of a main? that was we can run the whole file? 
         p fileName.main(args).rubify
         RubyPython.stop
+=======
+    def overallBar
+        system 'python lib/overallBar.py'
+        redirect_to '/overallBar/'
+    end
+
+    def studentGraph
+        system 'python lib/studentGraph.py 1'
+        redirect_to '/studentGraph/'
+>>>>>>> 8eb5a02c5f819de06edcac64304b2844cc0e8830
     end
 end
