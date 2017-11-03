@@ -19,6 +19,21 @@ def student_graph(student_id):
         'SELECT * FROM styles WHERE student_id=?', 
         [student_id,],
     )
+    dbData = c.fetchall()
+    conn.commit()
+    conn.close()
+    
+    # Get the scores needed
+    assert(len(dbData) != 0), "Cannot find student data."
+    scores = dbData[0][2:6]
+
+    # Make graph
+    labels = [Style(x).name for x in range(len(Style))]
+    yPos = np.arange(len(labels))
+    plt.bar(yPos, scores, align = 'center', alpha = 0.5)
+    plt.xticks(yPos, labels)
+    plt.ylabel("Score")
+    plt.title("Student " + str(student_id) + " Distribution of Types")
 
     dbData = c.fetchall()
 

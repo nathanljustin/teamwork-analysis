@@ -58,6 +58,7 @@ Currently does not work.
 ### Python Scripts
 
 * https://docs.python.org/3.6/library/sqlite3.html
+* https://pythonspot.com/en/matplotlib-bar-chart/
 
 ### UI
 
