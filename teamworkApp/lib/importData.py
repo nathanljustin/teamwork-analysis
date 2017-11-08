@@ -247,14 +247,27 @@ def execute_insert(csv_filename):
 	conn.commit()
 	conn.close()
 
-	print("Success.")
+	print("Success: Data inserted into 3 tables!")
 
 def main():
 	args = sys.argv
 	# TODO: remove this and other print statements when moving to Ruby
-	print("Inserting data)
-	execute_insert(args[1])
-	print("Success: Data inserted into 3 tables!")
+	print("Inserting data")
+	# first make sure there is another argument given
+	try:
+		filename = args[1]
+	except IndexError:
+		 print("No argument given. A csv file path must be passed in!")
+		 # make sure the file is a csv
+	if filename[-4:] == ".csv":
+		# make sure the path has been properly specified
+		try:
+			execute_insert(filename)
+		except FileNotFoundError:
+			print("File must have an accessible path!")
+	else:
+		print("File must be a CSV with extension .csv!")
+
 
 if __name__ == "__main__":
 	main()

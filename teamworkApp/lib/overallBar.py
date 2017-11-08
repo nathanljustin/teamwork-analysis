@@ -28,7 +28,7 @@ def getStylesData():
         length = len(types)
         for j in range(len(types)):
             data[types[j]] += 1.0/length
-    
+
     return data
 
 def main():
