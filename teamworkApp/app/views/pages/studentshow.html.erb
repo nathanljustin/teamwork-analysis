@@ -7,9 +7,57 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-    <div class="container">
+    <div class="container" style="padding:70px">
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-3">
+            <!--
+                <div class="form-group">
+                    <label for="sel2">Select list:</label>
+                    <select multiple class="form-control" id="sel2">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                    </select>
+                </div>
+            
+                <div class="checkbox">
+                    <label><input type="checkbox" value="">Option 1</label>
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox" value="">Option 2</label>
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox" value="">Option 3</label>
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox" value="">Option 4</label>
+                 </div>
+                <a href="#" class="btn btn-success" role="button">Generate Graph</a>
+                -->
+                <script>function changeText(){
+                    var listOfStudents = Array.prototype.slice.call(document.querySelectorAll(".color:checked")).map(function(el) {
+                            return el.value;
+                        }).join(', ')
+                    
+                    document.getElementById('output1').innerHTML = listOfStudents;
+                    return false;
+                    }
+                </script>
+                    
+                    <form method="get" onsubmit="return changeText()">        
+                    <type="text" name="name" id="name" />        
+                    <br /><br />
+                    <input type="checkbox" name="color" class="color" value="1">Name1<br />
+                    <input type="checkbox" name="color" class="color" value="2">Name2<br />
+                    <input type="checkbox" name="color" class="color" value="3">Name3<br />
+                    <input type="checkbox" name="color" class="color" value="4">Name4<br />
+                    <br /><br />
+                    <input type="submit" value="Output" class="btn btn-success"/>
+                    <br /><br />
+                    <b id='output1'></b><br />
+            </div>
+            <div class="col-lg-9">
                 <center>
                     <%= image_tag('summary1.png') %>
                 </center>

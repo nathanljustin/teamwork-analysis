@@ -79,6 +79,9 @@ Currently does not work.
 * http://www.rubydoc.info/gems/rubypython/0.5.1/RubyPython
 * https://github.com/halostatue/rubypython/issues/14
 
+### Student Selection
+* https://stackoverflow.com/questions/21410056/multiselect-in-rails
+
 ### Ruby on Rails
 
 * https://www.tutorialspoint.com/ruby-on-rails/rails-controllers.htm
