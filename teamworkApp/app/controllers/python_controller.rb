@@ -8,4 +8,9 @@ class PythonController < ApplicationController
         system 'python lib/studentGraph.py 1'
         redirect_to '/studentGraph/'
     end
+
+    def importData
+        system 'python lib/importData.py'
+        redirect_to '/'
+    end
 end
