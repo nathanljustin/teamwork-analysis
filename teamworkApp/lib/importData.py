@@ -199,12 +199,12 @@ def list_style_data(student_dict):
 	for student in student_dict.keys():
 		now               = datetime.now().isoformat()
 		expanded_responses = student_dict[student][1]
-		communicator, collaborator, challenger, contributor = find_style(expanded_responses)
+		# communicator, collaborator, challenger, contributor = find_style(expanded_responses)
 		# TODO: The commented out line below should be what we use in the
 			# future; however, evaluateAnswers has not been updated for the
 			# new schema (as of the time of writing this 10-28-2017) so we
 			# cannot use it yet
-		# (communicator, collaborator, challenger, contributor) = find_scores(primary_keys[count])
+		[(contributor, collaborator, communicator,  challenger, )] = find_scores([primary_keys[count]])
 		created_at   = student_dict[student][0]
 		student_id   = primary_keys[count]
 		style_to_db.append((
