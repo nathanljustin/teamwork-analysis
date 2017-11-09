@@ -19,6 +19,7 @@ def connect(sqlite_file):
 
 def close(conn):
     """ Commit changes and close connection to the database """
+    print('committing')
     conn.commit()
     conn.close()
 
@@ -83,7 +84,7 @@ def insert_students(students, test=False):
     with dbconnect(test) as c:
         c.executemany(
             'INSERT INTO students (name, created_at, updated_at, username) VALUES (?, ?, ?, ?);', 
-            student_to_db,
+            students,
         )
 
 def insert_answers(values, student_ids, questions, test=False):
@@ -91,7 +92,7 @@ def insert_answers(values, student_ids, questions, test=False):
     length = len(values)
     if not all(length == len(lst) for lst in [values, student_ids, questions]):
         raise ValueError('Inputs are not the same length')
-    answers = [for i in range(len(values))]
+    answers = [[values[i], student_ids[i], questions[i]] for i in range(len(values))]
     current_time = datetime.datetime.now().isoformat()
 
     with dbconnect(test) as c:

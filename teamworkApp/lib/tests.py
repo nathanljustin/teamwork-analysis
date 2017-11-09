@@ -6,7 +6,7 @@
 
 import unittest
 
-from dbCalls.py import *
+from dbCalls import *
 
 test_csv = 'test/test_spreadsheet.csv'
 
