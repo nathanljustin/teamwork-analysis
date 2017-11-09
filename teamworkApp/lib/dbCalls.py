@@ -19,7 +19,6 @@ def connect(sqlite_file):
 
 def close(conn):
     """ Commit changes and close connection to the database """
-    print('committing')
     conn.commit()
     conn.close()
 

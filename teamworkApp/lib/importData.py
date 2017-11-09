@@ -236,7 +236,10 @@ def execute_insert(csv_filename):
     print("Success: Data inserted into 3 tables!")
 
 def check_inputs(filename, test=False):
-    if test: TEST = True
+    """Checks the inputs and then starts the import process"""
+    if test: 
+        global TEST # needed to modify global variable TEST
+        TEST = True
 
     # TODO: remove this and other print statements when moving to Ruby
     print("Inserting data")
