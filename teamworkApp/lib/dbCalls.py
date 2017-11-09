@@ -1,13 +1,15 @@
 # muddersOnRails()
-# Sara McAllister November 5, 2-17
-# Last updated: 11-5-2017
+# Sara McAllister November 5, 2017
+# Last updated: 11-8-2017
 
 # library for SQLite database calls for teamwork analysis app
 
 import contextlib
+import datetime
 import sqlite3
 
 DB = 'db/development.sqlite3'
+test_DB = 'db/test.sqlite3'
 
 def connect(sqlite_file):
     """ Make connection to an SQLite database file """
@@ -21,77 +23,86 @@ def close(conn):
     conn.close()
 
 @contextlib.contextmanager
-def dbconnect(sqlite_file=DB):
+def dbconnect(test):
     """Create cursor and ensure that DB connection closes"""
+    sqlite_file = DB
+    if test: sqlite_file = test_DB
+
     conn, cursor = connect(sqlite_file)
     try:
         yield cursor
     finally:
         close(conn)
 
-def get_all_styles():
+def get_all_styles(test=False):
     """Return all style entries in db ordered based on entry in db"""
-    with dbconnect() as c:
+    with dbconnect(test) as c:
         scores = c.execute('SELECT * FROM styles').fetchall()
     return scores
 
-def get_student_styles(student_id):
+def get_student_styles(student_id, test=False):
     """Return style associated with a student's id"""
-    with dbconnect() as c:
+    with dbconnect(test) as c:
         styles = c.execute(
             'SELECT * FROM styles WHERE student_id=?', 
             [student_id,],
         ).fetchall()
     return styles
 
-def get_student_answers(student_id):
+def get_student_answers(student_id, test=False):
     """Return all answers associated with a student's id"""
-    with dbconnect() as c:
+    with dbconnect(test) as c:
         answers = c.execute(
             'SELECT * FROM answers WHERE student_id=? ORDER BY id DESC', 
             [student_id,],
         ).fetchone()
     return answers
 
-def get_all_students():
+def get_all_students(test=False):
     """Return all students' information"""
-    with dbconnect() as c:
+    with dbconnect(test) as c:
         students = c.execute('SELECT * FROM students').fetchall()
     return students
 
-def get_all_student_IDs():
+def get_all_student_IDs(test=False):
     """Return all students' information"""
-    with dbconnect() as c:
+    with dbconnect(test) as c:
         students = c.execute('SELECT id FROM students').fetchall()
     return students
 
-def insert_student_team_pairs(student_and_team_ids):
+def insert_student_team_pairs(student_and_team_ids, test=False):
     """Insert list of student_id team_id pairs into database"""
-    with dbconnect() as c:
+    with dbconnect(test) as c:
         c.executemany(
             'INSERT INTO assignments (student_id, team_id) VALUES (?,?)', 
             student_and_team_ids,
         )
 
-def insert_students(students):
+def insert_students(students, test=False):
     """Insert list of new students into database"""
-    with dbconnect() as c:
+    with dbconnect(test) as c:
         c.executemany(
             'INSERT INTO students (name, created_at, updated_at, username) VALUES (?, ?, ?, ?);', 
             student_to_db,
         )
 
-def insert_answers(answers):
+def insert_answers(values, student_ids, questions, test=False):
     """Insert list of new answers into database"""
-    with dbconnect() as c:
+    length = len(values)
+    if not all(length == len(lst) for lst in [values, student_ids, questions]):
+        raise ValueError('Inputs are not the same length')
+    answers = [for i in range(len(values))]
+    current_time = datetime.datetime.now().isoformat()
+
+    with dbconnect(test) as c:
         c.executemany(
-            'INSERT INTO answers (value, created_at, updated_at, student_id, question) VALUES (?, ?, ?, ?, ?);', 
+            'INSERT INTO answers (value, created_at, updated_at, student_id, question) VALUES (?, current_time, current_time, ?, ?);', 
             answers,
         )
 
-def insert_styles(styles):
+def insert_styles(styles, test=False):
     """Insert list of new styles into database"""
-    with dbconnect() as c:
+    with dbconnect(test) as c:
         c.executemany(
             'INSERT INTO styles (student_id, communicator, collaborator, challenger, contributor, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?);', 
             styles,
