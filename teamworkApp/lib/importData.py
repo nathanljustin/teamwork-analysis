@@ -94,40 +94,6 @@ def process_answer_data(csv_filename):
 
 		return student_dict
 
-def find_style(expanded_responses):
-	#TODO: This is basically deprecated as we are going to use evaluateAnswers
-		# for this calculation
-	contributor  = 0
-	collaborator = 0
-	communicator = 0
-	challenger   = 0
-	tracker      = 0
-	for resp in expanded_responses:
-		# this pattern is based on the teamwork survey scoring scheme
-		if tracker == 0:
-			contributor  += int(resp[0]) # a
-			collaborator += int(resp[1]) # b
-			communicator += int(resp[2]) # c
-			challenger   += int(resp[3]) # d
-		elif tracker == 1:
-			contributor  += int(resp[3]) # d
-			collaborator += int(resp[0]) # a
-			communicator += int(resp[1]) # b
-			challenger   += int(resp[2]) # c
-		elif tracker == 2:
-			contributor  += int(resp[2]) # c
-			collaborator += int(resp[3]) # d
-			communicator += int(resp[0]) # a
-			challenger   += int(resp[1]) # b
-		elif tracker == 3:
-			contributor  += int(resp[1]) # b
-			collaborator += int(resp[2]) # c
-			communicator += int(resp[3]) # d
-			challenger   += int(resp[0]) # a
-		else:
-			tracker = -1
-		tracker += 1
-	return communicator, collaborator, challenger, contributor
 
 def list_student_data(student_dict):
 	"""Using data from the csv file given, insertstudent_data finds how many
@@ -136,9 +102,6 @@ def list_student_data(student_dict):
 
 	for student in student_dict.keys():
 		now = datetime.now().isoformat()
-		# TODO(Maeve): add functionality to get which team the student is on.
-			# This will require more functionality on the teams side
-		# currently name and username are the same
 		student_to_db.append((student, student_dict[student][0], now, student))
 	return student_to_db
 
@@ -199,20 +162,16 @@ def list_style_data(student_dict):
 	for student in student_dict.keys():
 		now               = datetime.now().isoformat()
 		expanded_responses = student_dict[student][1]
-		# communicator, collaborator, challenger, contributor = find_style(expanded_responses)
-		# TODO: The commented out line below should be what we use in the
-			# future; however, evaluateAnswers has not been updated for the
-			# new schema (as of the time of writing this 10-28-2017) so we
-			# cannot use it yet
-		[(contributor, collaborator, communicator,  challenger, )] = find_scores([primary_keys[count]])
+		# call find_scores from evaluateAnswers
+		(contributor, collaborator, communicator, challenger) = find_scores(expanded_responses)
 		created_at   = student_dict[student][0]
 		student_id   = primary_keys[count]
 		style_to_db.append((
 				student_id,
-				communicator,
-				collaborator,
-				challenger,
 				contributor,
+				collaborator,
+				communicator,
+				challenger,
 				created_at,
 				now
 			))
@@ -254,6 +213,7 @@ def main():
 	# TODO: remove this and other print statements when moving to Ruby
 	print("Inserting data")
 	# first make sure there is another argument given
+	filename = ""
 	try:
 		filename = args[1]
 	except IndexError:

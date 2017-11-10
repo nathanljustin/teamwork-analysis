@@ -3,7 +3,7 @@ import sqlite3
 
 DB = 'db/development.sqlite3'
 
-NUM_QUESTIONS = 18
+QUESTIONS = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]
 
 Style = IntEnum('Style', 'Contributor, Collaborator, Communicator, Challenger', start=0)
 Answer_Value = IntEnum(
@@ -20,38 +20,22 @@ Questions = {
     3: (Style.Challenger, Style.Contributor, Style.Collaborator, Style.Communicator),
 }
 
-def get_students_answers(student_ids):
-    """return list of complete answers for a given student"""
-    conn = sqlite3.connect(DB)
-    c = conn.cursor()
-    rows = []
-    for i in range(len(student_ids)):
-        c.execute(
-            'SELECT * FROM answers WHERE student_id=?',
-            [student_ids[i],],
-        )
-        rows += [(c.fetchall())]
 
-    conn.commit()
-    conn.close()
-    return rows
-
-def find_scores(student_ids):
-    """Returns a student's scores for each of the possible styles in a tuple"""
-    all_scores = []
-    responses = []
-    student_responses = []
-    questions = range(NUM_QUESTIONS)
-    answer_rows = get_students_answers(student_ids)
-    for row in answer_rows:
-        responses = [Answer_Value(ans[1]).name for ans in row]
-        student_responses.append(responses)
+def find_scores(expanded_responses):
+    """Given a list of expanded responses (i.e. '1234', '3214'...), find_scores
+        will follow the scoring pattern outlined in Glenn Parker's
+        teamwork survey.
+        output: a tuple of four scores reflecting the four styles of the
+            teamwork survey, ie
+            (Contributor, Collaborator, Communicator, Challenger)"""
     scores = [0] * len(Style)
-    for resp in student_responses:
-        scores = [0] * len(Style)
-        for question in questions:
-            order = Questions[question % 4]
-            for i, style in enumerate(order):
-                scores[style.value] += int(resp[question][i])
-        all_scores.append(tuple(scores))
-    return all_scores
+    # loop through all the numbers corresponding to questions
+    for question in range(len(QUESTIONS)):
+        #find the order in which to score the expanded response
+        order = Questions[question % 4]
+        for i, style in enumerate(order):
+            # find the style and add it to the ongoing incrementation
+            # of the score
+            scores[style.value] += int(expanded_responses[question][i])
+    #(contributor, collaborator, communicator, challenger)
+    return tuple(scores)
