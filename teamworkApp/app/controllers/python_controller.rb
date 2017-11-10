@@ -4,7 +4,9 @@ class PythonController < ApplicationController
         redirect_to '/overallBar/'
     end
 
-    def studentGraph
+    def studentGraph(students)
+        puts "Hi"
+        puts students
         system 'python lib/studentGraph.py 1'
         redirect_to '/studentGraph/'
     end
