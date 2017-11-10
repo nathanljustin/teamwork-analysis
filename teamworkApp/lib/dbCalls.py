@@ -40,13 +40,12 @@ def get_all_styles(test=False):
         scores = c.execute('SELECT * FROM styles').fetchall()
     return scores
 
-def get_student_styles(student_id, test=False):
+def get_students_styles(student_ids, test=False):
     """Return style associated with a student's id"""
+    placeholders = ', '.join('?' for id in student_ids)
+    sql = 'SELECT * FROM styles WHERE student_id IN (%s)' % placeholders
     with dbconnect(test) as c:
-        styles = c.execute(
-            'SELECT * FROM styles WHERE student_id=?', 
-            [student_id,],
-        ).fetchall()
+        styles = c.execute(sql, student_ids).fetchall()
     return styles
 
 def get_student_answers(student_id, test=False):
@@ -55,7 +54,7 @@ def get_student_answers(student_id, test=False):
         answers = c.execute(
             'SELECT * FROM answers WHERE student_id=? ORDER BY id DESC', 
             [student_id,],
-        ).fetchone()
+        ).fetchall()
     return answers
 
 def get_all_students(test=False):
