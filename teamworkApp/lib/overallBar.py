@@ -1,8 +1,8 @@
 from enum import IntEnum
 import matplotlib.pyplot as plt
 import numpy as np
-from findType import getType
 
+from findType import getType
 import dbCalls
 
 Style = IntEnum('Style', 'Contributor, Collaborator, Communicator, Challenger', start=0)
