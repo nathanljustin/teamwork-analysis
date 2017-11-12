@@ -1,11 +1,9 @@
-from enum import IntEnum
 import matplotlib.pyplot as plt
 import numpy as np
 
+from evaluateAnswers import Style
 from findType import getType
 import dbCalls
-
-Style = IntEnum('Style', 'Contributor, Collaborator, Communicator, Challenger', start=0)
 
 def getStylesData():
     """Returns number of students per style"""

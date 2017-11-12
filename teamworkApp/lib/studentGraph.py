@@ -1,11 +1,9 @@
 import argparse 
 import matplotlib.pyplot as plt
 import numpy as np
-from enum import IntEnum
 
 import dbCalls
-
-Style = IntEnum('Style', 'Contributor, Collaborator, Communicator, Challenger', start=0)
+from evaluateAnswers import Style
 
 def student_graph(student_id):
     """Returns a path to where the student's graph is saved"""
