@@ -1,0 +1,8 @@
+
+  <center><h1> Import Data </h1>
+
+  <%= form_tag '/python/importData', multipart: true do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag "Import CSV" %>
+  <% end %>
+  </center>

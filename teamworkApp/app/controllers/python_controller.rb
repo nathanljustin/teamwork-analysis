@@ -10,7 +10,8 @@ class PythonController < ApplicationController
     end
 
     def importData
-        system 'python lib/importData.py'
+        path = params[:file]
+        system 'python lib/importData.py test/test_spreadsheet.csv'
         redirect_to '/'
     end
 end
