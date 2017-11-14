@@ -10,8 +10,9 @@ class PythonController < ApplicationController
     end
 
     def importData
-        path = params[:file]
-        system 'python lib/importData.py test/test_spreadsheet.csv'
+        path = params[:file].path
+        full_call = 'python lib/importData.py ' + path 
+        system (full_call)
         redirect_to '/'
     end
 end
