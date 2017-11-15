@@ -10,7 +10,13 @@ class PythonController < ApplicationController
     end
 
     def importData
-        system 'python lib/importData.py'
+        path = params[:file].path
+        full_call = 'python lib/importData.py ' + path 
+        if system (full_call)
+            flash[:notice] = 'Import was successful.'
+        else
+            flash[:notice] = 'Import failed.'
+        end
         redirect_to '/'
     end
 end

@@ -263,10 +263,12 @@ def main():
 		# make sure the path has been properly specified
 		try:
 			execute_insert(filename)
-		except FileNotFoundError:
+		except FileNotFoundError as error:
 			print("File must have an accessible path!")
+			raise error
 	else:
 		print("File must be a CSV with extension .csv!")
+		raise ValueError("Needs a CSV input")
 
 
 if __name__ == "__main__":
