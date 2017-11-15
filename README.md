@@ -53,6 +53,7 @@ Currently does not work.
 * https://www.justinweiss.com/articles/creating-easy-readable-attributes-with-activerecord-enums/
 * http://www.tomjewett.com/dbdesign/dbdesign.php?page=manymany.php
 * http://guides.rubyonrails.org/v3.2.8/migrations.html
+* http://pythoncentral.io/introduction-to-sqlite-in-python/
 
 
 ### Python Scripts
@@ -83,3 +84,7 @@ Currently does not work.
 
 * https://www.tutorialspoint.com/ruby-on-rails/rails-controllers.htm
 * http://guides.rubyonrails.org/action_controller_overview.html#methods-and-actions
+
+### Numpy
+
+* https://stackoverflow.com/questions/10919664/averaging-list-of-lists-python
