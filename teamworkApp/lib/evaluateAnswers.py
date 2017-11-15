@@ -3,7 +3,6 @@ import sqlite3
 
 DB = 'db/development.sqlite3'
 
-QUESTIONS = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]
 
 Style = IntEnum('Style', 'Contributor, Collaborator, Communicator, Challenger', start=0)
 Answer_Value = IntEnum(
@@ -30,7 +29,7 @@ def find_scores(expanded_responses):
             (Contributor, Collaborator, Communicator, Challenger)"""
     scores = [0] * len(Style)
     # loop through all the numbers corresponding to questions
-    for question in range(len(QUESTIONS)):
+    for question in range(0,18):
         #find the order in which to score the expanded response
         order = Questions[question % 4]
         for i, style in enumerate(order):
