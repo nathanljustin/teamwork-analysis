@@ -131,11 +131,10 @@ def list_student_data(student_dict):
     student_to_db = []
 
     for student in student_dict.keys():
-        now = datetime.now().isoformat()
         # TODO(Maeve): add functionality to get which team the student is on.
             # This will require more functionality on the teams side
         # currently name and username are the same
-        student_to_db.append((student, student_dict[student][0], now, student))
+        student_to_db.append((student, student))
     return student_to_db
 
 def list_answer_data(student_dict):
@@ -194,14 +193,12 @@ def list_style_data(student_dict):
         created_at   = student_dict[student][0]
         student_id   = primary_keys[count]
         style_to_db.append((
-                student_id,
-                communicator,
-                collaborator,
-                challenger,
-                contributor,
-                created_at,
-                now
-            ))
+            student_id,
+            communicator,
+            collaborator,
+            challenger,
+            contributor,
+        ))
         count += 1
 
     return style_to_db
