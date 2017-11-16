@@ -10,7 +10,7 @@
     <div class="container" style="padding:70px">
         <div class="row">
             <div class="col-lg-3">
-            <!--
+                <!--
                 <div class="form-group">
                     <label for="sel2">Select list:</label>
                     <select multiple class="form-control" id="sel2">
@@ -34,13 +34,13 @@
                     <label><input type="checkbox" value="">Option 4</label>
                  </div>
                 <a href="#" class="btn btn-success" role="button">Generate Graph</a>
-                -->
+
                 <script>function changeText(){
                     var listOfStudents = Array.prototype.slice.call(document.querySelectorAll(".color:checked")).map(function(el) {
                             return el.value;
                         }).join(', ')
                     
-                    document.getElementById('output1').innerHTML = listOfStudents;
+                    document.getElementById('output1').innerHTML = "<p>" + listOfStudents.join(" ");
                     return false;
                     }
                 </script>
@@ -53,11 +53,19 @@
                     <input type="checkbox" name="student" class="color" value="3">Name3<br />
                     <input type="checkbox" name="student" class="color" value="4">Name4<br />
                     <br /><br />
-                    <input type="submit" value="Generate Graph" class="btn btn-success"/>
+                    <input type="submit" value="Save Students" class="btn btn-success"/>
                     <br /><br />
-                    <% button_to "Generate Graph", python_studentGraph_path, :id =>'output1', :method => :get %>
-                    <b id='output1'></b><br />
                     
+                    button_to "Generate Graph", python_studentGraph_path, :id =>'output1', :method => :get
+                    
+                    <b id='output1'></b><br />
+                    <br /><br />
+                
+                <%= check_box_tag(:pet_dog) %>
+                <%= label_tag(:pet_dog, "I own a dog") %>
+                <%= check_box_tag(:pet_cat) %>
+                <%= label_tag(:pet_cat, "I own a cat") %> -->
+                
             </div>
             <div class="col-lg-9">
                 <center>

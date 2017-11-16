@@ -4,10 +4,10 @@ class PythonController < ApplicationController
         redirect_to '/overallBar/'
     end
 
-    def studentGraph(students)
-        puts "Hi"
-        puts students
+    def studentGraph
+        @students = params[:students]
+        puts @students
         system 'python lib/studentGraph.py 1'
-        redirect_to '/studentGraph/'
+        redirect_to '/python/studentGraph/'
     end
 end

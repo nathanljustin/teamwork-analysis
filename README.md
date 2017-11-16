@@ -81,6 +81,7 @@ Currently does not work.
 
 ### Student Selection
 * https://stackoverflow.com/questions/21410056/multiselect-in-rails
+* https://stackoverflow.com/questions/16954289/rails-url-path-with-parameters
 
 ### Ruby on Rails
 
