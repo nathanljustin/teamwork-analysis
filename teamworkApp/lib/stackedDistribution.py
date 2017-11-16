@@ -71,6 +71,7 @@ def make_stacked_graph(primaries, secondaries, tertiaries, quarternaries):
     # if the max is too big, split the ticks on the y axis for readablity
     if max_y >= 30:
         increment = 2
+        max_y += 3
 
     N = 4
     ind = np.arange(N)    # the x locations for the groups
@@ -93,9 +94,9 @@ def make_stacked_graph(primaries, secondaries, tertiaries, quarternaries):
     plt.xticks(ind, x_labels)
     plt.yticks(np.arange(0, max_y+2, increment))
     plt.legend((prim[0], sec[0], tert[0], quart[0]),
-                    ('Primary', 'Secondary', 'Tertiary', 'Quaternary'))
+                    ('Primary', 'Secondary', 'Tertiary', 'Quaternary'), bbox_to_anchor=(1.05, 1), loc=2,borderaxespad=0.)
 
-    plt.show()
+    plt.savefig('app/assets/images/overall.png', bbox_inches='tight')
 
 def main():
     tuples        = get_style_tuples()
