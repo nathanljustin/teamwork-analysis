@@ -86,3 +86,6 @@ Currently does not work.
 
 * https://www.tutorialspoint.com/ruby-on-rails/rails-controllers.htm
 * http://guides.rubyonrails.org/action_controller_overview.html#methods-and-actions
+* http://www.mattmorgante.com/technology/csv
+* http://guides.rubyonrails.org/routing.html
+* http://guides.rubyonrails.org/form_helpers.html#uploading-files
