@@ -10,6 +10,7 @@
 
 import sqlite3
 import csv
+import sys
 from evaluateAnswers import *
 from datetime import datetime, date, time
 from enum import IntEnum
@@ -246,13 +247,29 @@ def execute_insert(csv_filename):
 	conn.commit()
 	conn.close()
 
-	print("Success.")
+	print("Success: Data inserted into 3 tables!")
 
 def main():
+	args = sys.argv
 	# TODO: remove this and other print statements when moving to Ruby
 	print("Inserting data")
-	execute_insert('test/test_spreadsheet.csv')
-	print("Success: Data inserted into 3 tables!")
+	# first make sure there is another argument given
+	try:
+		filename = args[1]
+	except IndexError:
+		 print("No argument given. A csv file path must be passed in!")
+		 # make sure the file is a csv
+	if filename[-4:] == ".csv":
+		# make sure the path has been properly specified
+		try:
+			execute_insert(filename)
+		except FileNotFoundError as error:
+			print("File must have an accessible path!")
+			raise error
+	else:
+		print("File must be a CSV with extension .csv!")
+		raise ValueError("Needs a CSV input")
+
 
 if __name__ == "__main__":
 	main()
