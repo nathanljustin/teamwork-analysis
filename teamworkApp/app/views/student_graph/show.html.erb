@@ -65,11 +65,14 @@
                 <%= label_tag(:pet_dog, "I own a dog") %>
                 <%= check_box_tag(:pet_cat) %>
                 <%= label_tag(:pet_cat, "I own a cat") %> -->
-                
+                <%= simple_form_for @selection do |f| %>
+                    <%= f.input :selected, as: :check_boxes, collection: @students %>
+                    <%= f.button :submit, "Show Graph for Students", class: "btn btn-success" %>
+                <% end %>
             </div>
             <div class="col-lg-9">
                 <center>
-                    <%= image_tag('summary1.png') %>
+                    <%= image_tag('summary.png') %>
                 </center>
             </div>
         </div>

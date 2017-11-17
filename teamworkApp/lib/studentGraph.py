@@ -44,7 +44,7 @@ def student_graph(student_id):
     plt.ylabel("Score")
     plt.title("Student " + str(student_id) + " Distribution of Types")
 
-    name = 'app/assets/images/summary' + str(student_id) + '.png'
+    name = 'app/assets/images/summary.png'
     plt.savefig(name, bbox_inches='tight')
 
 def main():
