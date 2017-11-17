@@ -1,7 +1,6 @@
 from enum import IntEnum
-import sqlite3
 
-DB = 'db/development.sqlite3'
+import dbCalls
 
 
 Style = IntEnum('Style', 'Contributor, Collaborator, Communicator, Challenger', start=0)
