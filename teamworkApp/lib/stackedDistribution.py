@@ -1,6 +1,6 @@
 # muddersOnRails()
 # Maeve Murphy November 15, 2017
-# Last updated: 11-15-17
+# Last updated: 11-16-17
 
 # creates a histogram that shows the number of students with
 # primary, secondary, tertiary, and quarternary rankings
@@ -11,22 +11,16 @@
 
 import matplotlib.pyplot as plt
 import numpy as np
-from enum import IntEnum
+from evaluateAnswers import Style
+from dbCalls import *
 import sqlite3
 
 DB = 'db/development.sqlite3'
-Style = IntEnum('Style', 'Communicator, Collaborator, Challenger, Contributor', start=0)
 
 def get_style_tuples():
     """Retrieve all the style data stored in the database"""
-    conn = sqlite3.connect(DB)
-    c = conn.cursor()
-    c.execute(
-        'SELECT communicator, collaborator, challenger, contributor FROM styles'
-    )
-    style_data = c.fetchall()
-    conn.commit()
-    conn.close()
+    style_info = get_all_styles()
+    style_data = [i[2:6] for i in style_info]
 
     return style_data
 
@@ -45,14 +39,9 @@ def tally_nth(style_data, n):
         # sort from low to high
         sorted_styles = sorted(student)
         # max is -1, second greatest is -2, etc.
-        if student[0] == sorted_styles[-n]:
-            tallies[0] += 1
-        if student[1] == sorted_styles[-n]:
-            tallies[1] += 1
-        if student[2] == sorted_styles[-n]:
-            tallies[2] += 1
-        if student[3] == sorted_styles[-n]:
-            tallies[3] += 1
+        indexes = [i for i, x in enumerate(student) if x == sorted_styles[-n]]
+        for i in indexes:
+            tallies[i] += 1
     return tallies
 
 
