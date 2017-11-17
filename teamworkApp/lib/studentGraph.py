@@ -1,11 +1,9 @@
 import argparse 
 import matplotlib.pyplot as plt
 import numpy as np
-from enum import IntEnum
-import sqlite3
 
-DB = 'db/development.sqlite3'
-Style = IntEnum('Style', 'Contributor, Collaborator, Communicator, Challenger', start=0)
+import dbCalls
+from evaluateAnswers import Style
 
 def student_graph(student_id):
     """Returns a path to where the student's graph is saved"""
@@ -13,15 +11,7 @@ def student_graph(student_id):
     labels = [Style(x).name for x in range(len(Style))]
 
     # Connect to db to get scores
-    conn = sqlite3.connect(DB)
-    c = conn.cursor()
-    c.execute(
-        'SELECT * FROM styles WHERE student_id=?', 
-        [student_id,],
-    )
-    dbData = c.fetchall()
-    conn.commit()
-    conn.close()
+    dbData = dbCalls.get_students_styles([student_id])
     
     # Get the scores needed
     assert(len(dbData) != 0), "Cannot find student data."

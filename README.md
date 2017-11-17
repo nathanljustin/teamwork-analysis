@@ -59,6 +59,9 @@ Currently does not work.
 
 * https://docs.python.org/3.6/library/sqlite3.html
 * https://pythonspot.com/en/matplotlib-bar-chart/
+* https://docs.python.org/3/library/contextlib.html
+* https://docs.python.org/3.6/library/unittest.html
+
 
 ### UI
 
