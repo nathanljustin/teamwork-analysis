@@ -54,6 +54,7 @@ def get_all_styles(test=False):
         scores = c.execute('SELECT * FROM styles').fetchall()
     return scores
 
+
 def get_students_styles(student_ids, test=False):
     """
     Return style associated with students' ids
@@ -69,6 +70,16 @@ def get_students_styles(student_ids, test=False):
     with dbconnect(test) as c:
         styles = c.execute(sql, student_ids).fetchall()
     return styles
+
+def get_name(student_id, test=False):
+    """
+    """
+    with dbconnect(test) as c:
+        name = c.execute(
+            'SELECT name FROM students WHERE id =?', 
+            [student_id,],
+        ).fetchall()
+    return name
 
 def get_student_answers(student_id, test=False):
     """
