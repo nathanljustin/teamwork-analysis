@@ -1,21 +1,15 @@
-from enum import IntEnum
-import sqlite3
 import matplotlib.pyplot as plt
 import numpy as np
-from findType import getType
 
-DB = 'db/development.sqlite3'
-Style = IntEnum('Style', 'Contributor, Collaborator, Communicator, Challenger', start=0)
+from evaluateAnswers import Style
+from findType import getType
+import dbCalls
 
 def getStylesData():
     """Returns number of students per style"""
 
     # Get all scores
-    conn = sqlite3.connect(DB)
-    c = conn.cursor()
-    scores = c.execute('SELECT * FROM styles').fetchall()
-    conn.commit()
-    conn.close()
+    scores = dbCalls.get_all_styles()
 
     # Get types from scores
     # If multiple types, all counted

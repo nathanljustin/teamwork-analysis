@@ -53,13 +53,15 @@ Currently does not work.
 * https://www.justinweiss.com/articles/creating-easy-readable-attributes-with-activerecord-enums/
 * http://www.tomjewett.com/dbdesign/dbdesign.php?page=manymany.php
 * http://guides.rubyonrails.org/v3.2.8/migrations.html
-* http://pythoncentral.io/introduction-to-sqlite-in-python/
 
 
 ### Python Scripts
 
 * https://docs.python.org/3.6/library/sqlite3.html
 * https://pythonspot.com/en/matplotlib-bar-chart/
+* https://docs.python.org/3/library/contextlib.html
+* https://docs.python.org/3.6/library/unittest.html
+
 
 ### UI
 
@@ -84,7 +86,6 @@ Currently does not work.
 
 * https://www.tutorialspoint.com/ruby-on-rails/rails-controllers.htm
 * http://guides.rubyonrails.org/action_controller_overview.html#methods-and-actions
-
-### Numpy
-
-* https://stackoverflow.com/questions/10919664/averaging-list-of-lists-python
+* http://www.mattmorgante.com/technology/csv
+* http://guides.rubyonrails.org/routing.html
+* http://guides.rubyonrails.org/form_helpers.html#uploading-files

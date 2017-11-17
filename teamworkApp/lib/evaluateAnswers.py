@@ -1,7 +1,6 @@
 from enum import IntEnum
-import sqlite3
 
-DB = 'db/development.sqlite3'
+import dbCalls
 
 Style = IntEnum('Style', 'Contributor, Collaborator, Communicator, Challenger', start=0)
 Answer_Value = IntEnum(
@@ -18,25 +17,9 @@ Questions = {
     3: (Style.Challenger, Style.Contributor, Style.Collaborator, Style.Communicator),
 }
 
-def get_students_answers(student_id):
-    """return list of complete answers for a given student"""
-    conn = sqlite3.connect(DB)
-    c = conn.cursor()
-
-    c.execute(
-        'SELECT * FROM answers WHERE student_id=?', 
-        [student_id,],
-    )
-    rows = c.fetchall()
-
-    conn.commit()
-    conn.close()
-
-    return rows
-
 def find_scores(student_id):
     """Returns a student's scores for each of the possible styles in a tuple"""
-    answers = get_students_answers(student_id)
+    answers = dbCalls.get_student_answers(student_id)
     questions = [answer[5] for answer in answers]
     values = [Answer_Value(answer[1]).name for answer in answers]
     scores = [0] * len(Style)
