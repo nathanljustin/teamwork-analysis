@@ -1,6 +1,6 @@
 class PythonController < ApplicationController
     def overallBar
-        system 'python lib/overallBar.py'
+        system 'python lib/stackedDistribution.py'
         redirect_to '/overallBar/'
     end
 
@@ -13,7 +13,7 @@ class PythonController < ApplicationController
 
     def importData
         path = params[:file].path
-        full_call = 'python lib/importData.py ' + path 
+        full_call = 'python lib/importData.py ' + path
         if system (full_call)
             flash[:notice] = 'Import was successful.'
         else
