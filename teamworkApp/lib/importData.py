@@ -13,7 +13,7 @@ import sqlite3
 import csv
 from datetime import datetime, date, time
 
-import dbCalls
+from dbCalls import *
 from evaluateAnswers import *
 
 EXPANDED_QUESTIONS = 72
@@ -128,7 +128,6 @@ def list_answer_data(student_dict):
             answer_to_db.append((
                 response,
                 student_dict[student][0],
-                now,
                 primary_keys[count],
                 question_count
             ))
@@ -167,6 +166,7 @@ def list_style_data(student_dict):
 				communicator,
 				challenger,
 				created_at,
+                now
 			))
 		count += 1
 
@@ -199,7 +199,7 @@ def execute_insert(csv_filename):
 
 def check_inputs(filename, test=False):
     """Checks the inputs and then starts the import process"""
-    if test: 
+    if test:
         global TEST # needed to modify global variable TEST
         TEST = True
 
@@ -217,15 +217,15 @@ def check_inputs(filename, test=False):
     else:
         print("File must be a CSV with extension .csv!")
         raise ValueError("Needs a CSV input")
-        
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Import csv file")
     parser.add_argument(
-        'filepath',  
+        'filepath',
         help='Path to file',
     )
     parser.add_argument(
-        '-t', '--test', 
+        '-t', '--test',
         dest='test',
         action='store_true',
         help='Student id for desired student graph',
