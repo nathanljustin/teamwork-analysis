@@ -83,8 +83,8 @@ Currently does not work.
 * https://github.com/halostatue/rubypython/issues/14
 
 ### Student Selection
-* https://stackoverflow.com/questions/21410056/multiselect-in-rails
-* https://stackoverflow.com/questions/16954289/rails-url-path-with-parameters
+* https://github.com/plataformatec/simple_form
+* http://guides.rubyonrails.org/form_helpers.html
 
 ### Ruby on Rails
 
