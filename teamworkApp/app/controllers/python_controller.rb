@@ -19,4 +19,9 @@ class PythonController < ApplicationController
         end
         redirect_to '/'
     end
+
+    def deleteData
+        system 'python lib/delete_data.py'
+        redirect_to '/'
+    end
 end
