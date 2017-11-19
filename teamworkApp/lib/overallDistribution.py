@@ -109,7 +109,7 @@ def make_adjacent_graph(primaries, secondaries, tertiaries, quarternaries):
     ax.set_ylabel('Number of Students')
 
     # Set the chart's title
-    ax.set_title('Test Subject Scores')
+    ax.set_title('Survey Results in Order of Dominance')
 
     # Set the position of the x ticks
     ax.set_xticks([p + 1.5 * width for p in pos])
