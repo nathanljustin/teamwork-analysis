@@ -11,7 +11,6 @@
 import argparse
 import sqlite3
 import csv
-from datetime import datetime, date, time
 
 from dbCalls import *
 from evaluateAnswers import *
@@ -120,7 +119,6 @@ def list_answer_data(student_dict):
     # iterate through the students to find the enumerated responses to each
         # question along with student_id and relevant timestamps
     for student in student_dict.keys():
-        now                  = datetime.now().isoformat()
         enummed_responses     = student_dict[student][2]
         question_count       = 0
 
@@ -153,20 +151,17 @@ def list_style_data(student_dict):
 
 	count = 0
 	for student in student_dict.keys():
-		now               = datetime.now().isoformat()
 		expanded_responses = student_dict[student][1]
 		# call find_scores from evaluateAnswers
 		(contributor, collaborator, communicator, challenger) = find_scores(expanded_responses)
-		created_at   = student_dict[student][0]
+		# created_at   = student_dict[student][0]
 		student_id   = primary_keys[count]
 		style_to_db.append((
 				student_id,
-				contributor,
+                communicator,
 				collaborator,
-				communicator,
 				challenger,
-				created_at,
-                now
+                contributor
 			))
 		count += 1
 
@@ -188,10 +183,10 @@ def execute_insert(csv_filename):
     answer_to_db  = list_answer_data(student_dict)
     style_to_db   = list_style_data(student_dict)
     print("Inserting data into 'answers' and 'styles'...")
-
+    # print("answer is ", answer_to_db)
     values = [item[0] for item in answer_to_db]
-    student_ids = [item[3] for item in answer_to_db]
-    questions = [item[4] for item in answer_to_db]
+    student_ids = [item[2] for item in answer_to_db]
+    questions = [item[3] for item in answer_to_db]
     dbCalls.insert_answers(values, student_ids, questions, TEST)
     dbCalls.insert_styles(style_to_db, TEST)
 
