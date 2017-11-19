@@ -180,3 +180,17 @@ def insert_styles(styles, test=False):
             styles,
         )
 
+
+###########################################
+#                DELETE                   #
+###########################################
+
+def remove_all(test=False):
+    """
+    Remove all entries in database PERMANENTLY
+    """
+    with dbconnect(test) as c:
+        c.execute('DELETE FROM students')
+        c.execute('DELETE FROM styles')
+        c.execute('DELETE FROM answers')
+        
