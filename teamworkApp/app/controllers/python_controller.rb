@@ -21,7 +21,9 @@ class PythonController < ApplicationController
     end
 
     def deleteData
-        system 'python lib/delete_data.py'
+        if system 'python lib/delete_data.py'
+            flash[:notice] = 'Deleted data successfully.'
+        end
         redirect_to '/'
     end
 end
