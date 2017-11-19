@@ -8,7 +8,10 @@
 
 # resources:
 # https://matplotlib.org/examples/pylab_examples/bar_stacked.html
+# https://chrisalbon.com/python/matplotlib_grouped_bar_plot.html
 
+
+import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 from evaluateAnswers import Style
@@ -45,47 +48,84 @@ def tally_nth(style_data, n):
     return tallies
 
 
-def make_stacked_graph(primaries, secondaries, tertiaries, quarternaries):
+def make_adjacent_graph(primaries, secondaries, tertiaries, quarternaries):
     """Given all the prominences of styles from the style table in the
-        database, create a stacked graph to aggregate the information
+        database, create a adjacent bar graph to aggregate the information
         into one place by stacknig them in a histogram."""
     x_labels = [Style(x).name for x in range(len(Style))]
+    print(x_labels,primaries,secondaries,tertiaries,quarternaries)
 
-    # find the max height and scale the graph accordingly
-    heights = [0,0,0,0]
-    for i in range(0,4):
-        heights[i] = primaries[i] + secondaries[i] + tertiaries[i] + quarternaries[i]
-    max_y = max(heights)
-    increment = 1
-    # if the max is too big, split the ticks on the y axis for readablity
-    if max_y >= 30:
-        increment = 2
-        max_y += 3
+    raw_data = {'styles': ['Communicator', 'Collaborator','Challenger', 'Contributor'],
+        'primary': primaries,
+        'secondary': secondaries,
+        'tertiary': tertiaries,
+        'quarternary': quarternaries}
+    df = pd.DataFrame(raw_data, columns = ['styles', 'primary', 'secondary', 'tertiary', 'quarternary'])
 
-    N = 4
-    ind = np.arange(N)    # the x locations for the groups
-    width = 0.35       # the width of the bars
+    # Setting the positions and width for the bars
+    pos = list(range(len(df['styles'])))
+    width = 0.2
 
-    # stack each ranking
-    # bottom is calculated such that it sits on top of rankings
-    # of higher order
-    prim  = plt.bar(ind, primaries, width, color='#82ccc4')
-    sec   = plt.bar(ind, secondaries, width, color='#777ea8',
-                  bottom=np.array(primaries))
-    tert  = plt.bar(ind, tertiaries, width, color='#008081',
-                  bottom=(np.array(secondaries) + np.array(primaries)))
-    quart = plt.bar(ind, quarternaries, width, color='#c4d89e',
-                  bottom=(np.array(secondaries)
-                  + np.array(tertiaries) + np.array(primaries)))
+    # Plotting the bars
+    fig, ax = plt.subplots(figsize=(10,5))
 
-    plt.ylabel('Number of Students')
-    plt.title('Scores by Order of Styles')
-    plt.xticks(ind, x_labels)
-    plt.yticks(np.arange(0, max_y+2, increment))
-    plt.legend((prim[0], sec[0], tert[0], quart[0]),
-                    ('Primary', 'Secondary', 'Tertiary', 'Quaternary'), bbox_to_anchor=(1.05, 1), loc=2,borderaxespad=0.)
+    # Create a bar with primary data,
+    # in position pos,
+    plt.bar(pos,
+            df['primary'],
+            width,
+            alpha=0.5,
+            color='#82ccc4',
+            label=df['styles'][0])
 
+    # Create a bar with secondary data,
+    # in position pos + some width buffer,
+    plt.bar([p + width for p in pos],
+            df['secondary'],
+            width,
+            alpha=0.5,
+            color='#777ea8',
+            label=df['styles'][1])
+
+    # Create a bar with tertiary data,
+    # in position pos + some width buffer,
+    plt.bar([p + width*2 for p in pos],
+            df['tertiary'],
+            width,
+            alpha=0.5,
+            color='#008081',
+            label=df['styles'][2])
+    # Create a bar with quarternary data,
+    # in position pos + some width buffer,
+    plt.bar([p + width*3 for p in pos],
+            df['quarternary'],
+            width,
+            alpha=0.5,
+            color='#c4d89e',
+            label=df['styles'][3])
+
+
+    # Set the y axis label
+    ax.set_ylabel('Number of Students')
+
+    # Set the chart's title
+    ax.set_title('Test Subject Scores')
+
+    # Set the position of the x ticks
+    ax.set_xticks([p + 1.5 * width for p in pos])
+
+    # Set the labels for the x ticks
+    ax.set_xticklabels(df['styles'])
+
+    # Setting the x-axis and y-axis limits
+    plt.xlim(min(pos)-width, max(pos)+width*4)
+    plt.ylim([0, max(df['primary'] + df['secondary'] + df['tertiary'] + df['quarternary']) + 1] )
+
+    # Adding the legend and showing the plot
+    plt.legend(['Primary', 'Secondary', 'Tertiary', 'Quaternary'], bbox_to_anchor=(1.05, 1), loc=2,borderaxespad=0.)
+    # plt.show()
     plt.savefig('app/assets/images/overall.png', bbox_inches='tight')
+
 
 def main():
     tuples        = get_style_tuples()
@@ -94,7 +134,7 @@ def main():
     tertiaries    = tally_nth(tuples, 3)
     quarternaries = tally_nth(tuples, 4)
 
-    make_stacked_graph(primaries, secondaries, tertiaries, quarternaries)
+    make_adjacent_graph(primaries, secondaries, tertiaries, quarternaries)
 
 if __name__ == "__main__":
 	main()
