@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   get '/python/studentGraph/' => "python#studentGraph"  
   get '/python/overallBar/' => 'python#overallBar'
+  get '/python/deleteData/' => 'python#deleteData'
   get '/studentGraph/' => 'high_voltage/pages#show', id: 'studentshow'
   get '/overallBar/' => 'high_voltage/pages#show', id: 'overallshow'
   get '/importData/' => 'high_voltage/pages#show', id: 'importdata'

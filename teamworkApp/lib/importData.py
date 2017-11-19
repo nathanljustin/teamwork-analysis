@@ -16,6 +16,7 @@ from dbCalls import *
 from evaluateAnswers import *
 
 EXPANDED_QUESTIONS = 72
+USERNAME_COL = 80
 TEST = False
 
 
@@ -85,7 +86,7 @@ def process_answer_data(csv_filename):
 
             # the timestamps are saved in the first column of the .csv file
             timestamp = student[0]
-            student_dict[student[-1]] = [timestamp, expanded_responses, enummed_responses]
+            student_dict[student[USERNAME_COL]] = [timestamp, expanded_responses, enummed_responses]
 
         return student_dict
 
@@ -94,7 +95,6 @@ def list_student_data(student_dict):
     """Using data from the csv file given, insertstudent_data finds how many
     students are in the file and places them into the student table"""
     student_to_db = []
-
     for student in student_dict.keys():
         # TODO(Maeve): add functionality to get which team the student is on.
             # This will require more functionality on the teams side
@@ -166,8 +166,6 @@ def list_style_data(student_dict):
 		count += 1
 
 	return style_to_db
-
-
 
 def execute_insert(csv_filename):
     student_dict   = process_answer_data(csv_filename)
