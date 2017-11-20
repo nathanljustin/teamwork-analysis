@@ -179,3 +179,18 @@ def insert_styles(styles, test=False):
             'INSERT INTO styles (student_id, communicator, collaborator, challenger, contributor, created_at, updated_at) VALUES (?, ?, ?, ?, ?, current_time, current_time);', 
             styles,
         )
+
+
+###########################################
+#                DELETE                   #
+###########################################
+
+def remove_all(test=False):
+    """
+    Remove all entries in database PERMANENTLY
+    """
+    with dbconnect(test) as c:
+        c.execute('DELETE FROM students')
+        c.execute('DELETE FROM styles')
+        c.execute('DELETE FROM answers')
+        
