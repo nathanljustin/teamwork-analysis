@@ -119,7 +119,11 @@ def make_adjacent_graph(primaries, secondaries, tertiaries, quarternaries):
 
     # Setting the x-axis and y-axis limits
     plt.xlim(min(pos)-width, max(pos)+width*4)
-    plt.ylim([0, max(df['primary'] + df['secondary'] + df['tertiary'] + df['quarternary']) + 1] )
+    maxHeight = max(max(df['primary']), max(df['secondary']), max(df['tertiary']), max(df['quarternary'])) + 1
+    if maxHeight > 30:
+        maxHeight += 2
+    print("max y is", maxHeight)
+    plt.ylim([0, maxHeight])#max(df['primary'], df['secondary'], df['tertiary'], df['quarternary']) + 1] )
 
     # Adding the legend and showing the plot
     plt.legend(['Primary', 'Secondary', 'Tertiary', 'Quaternary'], bbox_to_anchor=(1.05, 1), loc=2,borderaxespad=0.)
