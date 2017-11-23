@@ -4,13 +4,6 @@ class PythonController < ApplicationController
         redirect_to '/overallBar/'
     end
 
-    def studentGraph
-        @students = params[:students]
-        puts @students
-        system 'python lib/studentGraph.py 1'
-        redirect_to '/python/studentGraph/'
-    end
-
     def importData
         path = params[:file].path
         full_call = 'python lib/importData.py ' + path
