@@ -50,9 +50,7 @@ class TestDBCallsCase(unittest.TestCase):
     def tearDown(self):
         with dbCalls.dbconnect(True) as c:
             print('Clearing out test database')
-            c.execute('DELETE FROM students')
-            c.execute('DELETE FROM styles')
-            c.execute('DELETE FROM answers')
+            dbCalls.remove_all(test=True)
 
 
 if __name__ == '__main__':
