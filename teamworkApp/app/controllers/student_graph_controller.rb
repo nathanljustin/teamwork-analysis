@@ -1,6 +1,9 @@
 class StudentGraphController < ApplicationController
     def show
-        @selection = Selection.new
+        # @students: Stores all the student objects
+        # @selected: Stores whether the student was selected previously or not
+        # @image: Stores the image name of the graph (if available)
+
         @students = Student.all
 
         # Precheck boxes based on  what was previously checked
@@ -25,17 +28,19 @@ class StudentGraphController < ApplicationController
     end
 
     def graph
-        # Turn selected inputs into an array
-        c = []
-        for id in params[:selection][:selected]
-            if id != ""
-                c.push(id)
+        if params[:selection].present?
+            # Turn selected inputs into an array
+            c = []
+            for id in params[:selection][:selected]
+                if id != ""
+                    c.push(id)
+                end
             end
-        end
 
-        # Call the python function for the graph
-        a = params[:selection][:selected].join(" ")        
-        system 'python lib/studentGraph.py' + a
+            # Call the python function for the graph
+            a = params[:selection][:selected].join(" ")        
+            system 'python lib/studentGraph.py' + a
+        end
 
         redirect_to student_graph_show_path(:id => c) 
     end

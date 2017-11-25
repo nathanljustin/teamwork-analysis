@@ -13,7 +13,7 @@
                 <center>
                     <h4>Students</h4>
                 </center>
-                <%= simple_form_for @selection do |f| %>
+                <%= simple_form_for :selection do |f| %>
                     <% @students.each do |student| %>
                         <%= f.input :selected, as: :check_boxes, collection: [student], :input_html => { :checked => @selected[student.id.to_s] }, label: false %>
                      <% end %>
