@@ -16,7 +16,7 @@
                 <%= simple_form_for @selection do |f| %>
                     <% @students.each do |student| %>
                         <%= f.input :selected, as: :check_boxes, collection: [student], :input_html => { :checked => @selected[student.id.to_s] }, label: false %>
-                     <%end %>
+                     <% end %>
                     <%= f.button :submit, "Show Graph for Students", class: "btn btn-success" %>
                 <% end %>
             </div>

@@ -27,8 +27,8 @@ class StudentGraphController < ApplicationController
         end
 
         # Call the python function for the graph
-        a = params[:selection][:selected].join("")        
-        system 'python lib/studentGraph.py' + ' ' + a
+        a = params[:selection][:selected].join(" ")        
+        system 'python lib/studentGraph.py' + a
 
         redirect_to student_graph_show_path(:id => c) 
     end
