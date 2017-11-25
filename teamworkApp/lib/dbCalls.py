@@ -76,7 +76,7 @@ def get_name(student_id, test=False):
             'SELECT name FROM students WHERE id =?', 
             [student_id,],
         ).fetchall()
-    return name
+    return name[0][0]
 
 def get_student_answers(student_id, test=False):
     """
