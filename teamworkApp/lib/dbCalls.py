@@ -70,6 +70,11 @@ def get_students_styles(student_ids, test=False):
 
 def get_name(student_id, test=False):
     """
+    Return the name associated with a student's id
+    Args:
+        student_id: A single student's id
+    Returns:
+        The name of the student as a string
     """
     with dbconnect(test) as c:
         name = c.execute(

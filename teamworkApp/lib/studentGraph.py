@@ -19,7 +19,7 @@ def student_graph(student_ids):
     # Get the scores needed
     assert(len(dbData) != 0), "Cannot find student data."
 
-    # create split bar graph if <= 4 students
+    # create split bar graph if <= 6 students
     if len(scoreSet) <= 6:
         # change for each set of bars
         widthChange = -0.4
@@ -32,7 +32,7 @@ def student_graph(student_ids):
             widthChange += width
             currIter += 1
     
-    # create summary graph if > 4 students
+    # create summary graph if > 6 students
     else:
         # find avg val for each score
         avgScores = [float(sum(col))/len(col) for col in zip(*scoreSet)]
