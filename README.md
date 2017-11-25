@@ -82,6 +82,10 @@ Currently does not work.
 * http://www.rubydoc.info/gems/rubypython/0.5.1/RubyPython
 * https://github.com/halostatue/rubypython/issues/14
 
+### Student Selection
+* https://github.com/plataformatec/simple_form
+* http://guides.rubyonrails.org/form_helpers.html
+
 ### Ruby on Rails
 
 * https://www.tutorialspoint.com/ruby-on-rails/rails-controllers.htm

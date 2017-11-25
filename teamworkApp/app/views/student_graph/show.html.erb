@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Teamwork Analysis</title>
+  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+    <div class="container" style="padding:70px">
+        <div class="row">
+            <div class="col-lg-3">
+                <center>
+                    <h4>Students</h4>
+                </center>
+                <%= simple_form_for @selection do |f| %>
+                    <% @students.each do |student| %>
+                        <%= f.input :selected, as: :check_boxes, collection: [student], :input_html => { :checked => @selected[student.id.to_s] }, label: false %>
+                     <%end %>
+                    <%= f.button :submit, "Show Graph for Students", class: "btn btn-success" %>
+                <% end %>
+            </div>
+            <div class="col-lg-9">
+                <center>
+                    <%= image_tag('summary.png') %>
+                </center>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
