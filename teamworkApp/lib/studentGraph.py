@@ -11,6 +11,7 @@ def student_graph(student_ids):
     """Returns a path to where the student's graph is saved"""
 
     labels = [Style(x).name for x in range(len(Style))]
+    names = dbCalls.get_names(student_ids)
     # Connect to db to get scores
     dbData = dbCalls.get_students_styles(student_ids)
     yPos = np.arange(len(labels))
@@ -27,7 +28,7 @@ def student_graph(student_ids):
         colors = ['#3fe0d0', '#111e6c', '#008081', '#a3de38', '#3378e8', '#8733e8']
         currIter = 0
         for scores in scoreSet:
-            username = dbCalls.get_name(student_ids[currIter])
+            username = names[currIter][0]
             plt.bar(yPos + widthChange, scores, width = width, color = colors[currIter],  align='edge', alpha = 0.5, label = username)
             widthChange += width
             currIter += 1
