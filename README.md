@@ -4,6 +4,7 @@
 
 * [Summary](#summary)
 * [Contributors](#contributors)
+* [Background Research Findings](#background-research-findings)
 * [MVP Objectives](#mvp-objectives)
 * [Functionality](#functionality)
 * [Architecture](#architecture)
@@ -13,7 +14,7 @@
 
 ## Summary
 
-Our project consists of two main parts. The first part of our project is data visualization and teamwork research. We are using the CS 121 teamwork survey as our basis. From this, we will develop a web interface that shows data from this survey. We will research the best, most helpful graphs to show. To enable us to do this, we will need a database, a method for the user to upload to the database, and a way to construct graphs from this data. The second part of our project consists of researching team dynamics. We are going to research many different teamwork strategies to fine tune the CS 121 survey, as well as estimate what consists of a good team.
+Our project consists of two main parts, conducted in conjunction. The first part of our project was data visualization and teamwork research. We used Glenn Parker’s teamwork survey as our basis and obtained our data from student responses to the survey throughout the semester. With this, we developed a web interface that presents this data in graphical format and allows users to import data about their courses and teams. To enable this, we needed a few things: a database, amethod for the user to upload to the database, and a way to construct graphsfrom this data. The second part of our project consists of researching teamdynamics. We researched many different teamwork strategiesto estimate what consists of a good team.  When we fine tuned how we visualized the data CS 121 survey, we compiled the data and our researchto to produce graphs which show team dynamics.
 
 ## Contributers
 
@@ -22,15 +23,24 @@ Our project consists of two main parts. The first part of our project is data vi
 * Maeve Murphy
 * Reagan Smith
 
+## Problem Description
+
+How can we use data collected from Glenn Parker’s Teamwork Survey and research into team dynamics to visualize details of team members and students, and create different types of well-structured teams to foster good work environments?
+
+## Background Research Findings
+
+From the research linked in the references section, the best teams are those with communicators, challengers, contributors, and collaborators represented. In particular, teams need a lot of communication to work well together so not having a strong communicator is a drawback to the team. Also, one challenger on a team is important, but more can cause problems.
+
 ## MVP objective
 
 For our minimum viable product (MVP), we expect to deliver two main functionalities: a method to import survey data and a basic graphical representation of the data. To import survey data, we plan on allowing the user to enter a json with multiple people’s results from the survey. This data will then be stored in our database. The second part of our MVP is graphical interpretations of the data. For the MVP, we plan on visualizing the overall results of the data so that the user can see the proportions of challenger to communicator to collaborator to contributor for the class. We also plan to have a set of graphs that show a person’s individual scores and a set of graphs that will show the distribution of responses to each question. 
 
 ## Functionality
 
-* We will provide an interface where, after submitting their survey, users can see any relevant charts, graphs, and information.
-* We will have an analysis of survey results that is useful in helping students find compatible teammates and interesting patterns or characteristics in the data that the instructor can use. The analysis will be backed up by research.
-* We will provide algorithms that can interpret the data in multiple ways.
+* The user can upload a CSV and the information will be saved to the database.
+* The user can look at the overall distribution of the data between the four types.
+* The user can select as many students as they want from the imported data and see the distribution of the selected students over the categories.
+* When the user wants to look at a different set of students such as a different course, the user can delete the current information stored in the database and start the process over again.
 
 ## Architecture
 
@@ -46,6 +56,13 @@ None.
 Currently does not work.
 
 ## References
+
+### Teamwork Research
+
+* Briggs,  Margaret  H. 1993. [Team Talk: Communication Skills for Early Intervention Teams.](http://journals.sagepub.com/doi/abs/10.1177/152574019301500106)
+* Kirnan, Jean Powell; Diane Woodruff. 1994. [Reliability and Validity Estimates of the Parker Team Player Survey.](http://journals.sagepub.com/doi/abs/10.1177/0013164494054004020)
+* Luca, Joe; Pina Tarricone. 2002. [Successful Teamwork: A CaseStudy.](http://www.unice.fr/crookall-cours/teams/docs/team%20Successful%20teamwork.pdf)
+* Parker, Glenn M. 2008. Team Players and Teamwork New Strategies for Develop-ing Successful Collaboration. Jossey-Bass: San Francisco.
 
 ### Database Setup
 
