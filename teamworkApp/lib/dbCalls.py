@@ -46,7 +46,6 @@ def dbconnect(test):
 def get_all_styles(test=False):
     """
     Return all style entries in db ordered based on entry in db
-
     Returns:
         List of style entries (essentially list of tuples)
     """
@@ -54,13 +53,12 @@ def get_all_styles(test=False):
         scores = c.execute('SELECT * FROM styles').fetchall()
     return scores
 
+
 def get_students_styles(student_ids, test=False):
     """
     Return style associated with students' ids
-
     Args:
         student_ids: A list of student_ids 
-
     Returns:
         List of style db entries
     """
@@ -70,13 +68,25 @@ def get_students_styles(student_ids, test=False):
         styles = c.execute(sql, student_ids).fetchall()
     return styles
 
+def get_names(student_ids, test=False):
+    """
+    Return the names associated with student ids
+    Args:
+        student_ids: A list of student ids
+    Returns:
+        The names of the students as a list of strings
+    """
+    placeholders = ', '.join('?' for id in student_ids)
+    sql = 'SELECT name FROM students WHERE id IN (%s)' % placeholders
+    with dbconnect(test) as c:
+        names = c.execute(sql, student_ids).fetchall()
+    return names
+
 def get_student_answers(student_id, test=False):
     """
     Return all answers associated with a student's id
-
     Args:
         student_id: A single student's id
-
     Returns:
         A list of answer db tuples
     """
@@ -90,7 +100,6 @@ def get_student_answers(student_id, test=False):
 def get_all_students(test=False):
     """
     Return all students' information
-
     Returns:
         A list of student db entries
     """
@@ -101,7 +110,6 @@ def get_all_students(test=False):
 def get_all_student_IDs(test=False):
     """
     Return all students' information
-
     Returns:
         A list of all students' id numbers
     """
@@ -116,7 +124,6 @@ def get_all_student_IDs(test=False):
 def insert_student_team_pairs(student_and_team_ids, test=False):
     """
     Insert list of student_id team_id pairs into database
-
     Args:
         student_and_team_ids: list of (student_id, team_id) pairs
     """
@@ -129,7 +136,6 @@ def insert_student_team_pairs(student_and_team_ids, test=False):
 def insert_students(students, test=False):
     """
     Insert list of new students into database
-
     Args: 
         students: list of (name, username) for each student
     """  
@@ -145,7 +151,6 @@ def insert_students(students, test=False):
 def insert_answers(values, student_ids, questions, test=False):
     """
     Insert list of new answers into database
-
     Args:
         values: the values for each answer
         student_ids: student's id for each answer
@@ -166,7 +171,6 @@ def insert_answers(values, student_ids, questions, test=False):
 def insert_styles(styles, test=False):
     """
     Insert list of new styles into database
-
     Args: 
         styles: list of (student_id, communicator, collaborator, challenger, contributor)
     """

@@ -1,53 +1,55 @@
 import argparse 
 import matplotlib.pyplot as plt
 import numpy as np
+import sys
 
 import dbCalls
 from evaluateAnswers import Style
 
-def student_graph(student_id):
+
+def student_graph(student_ids):
     """Returns a path to where the student's graph is saved"""
 
     labels = [Style(x).name for x in range(len(Style))]
-
+    names = dbCalls.get_names(student_ids)
     # Connect to db to get scores
-    dbData = dbCalls.get_students_styles([student_id])
-    
+    dbData = dbCalls.get_students_styles(student_ids)
+    yPos = np.arange(len(labels))
+    scoreSet = [data[2:6] for data in dbData]
+
     # Get the scores needed
     assert(len(dbData) != 0), "Cannot find student data."
-    scores = dbData[0][2:6]
+
+    # create split bar graph if <= 6 students
+    if len(scoreSet) <= 6:
+        # change for each set of bars
+        widthChange = -0.4
+        width = 0.8/len(scoreSet)
+        colors = ['#3fe0d0', '#111e6c', '#008081', '#a3de38', '#3378e8', '#8733e8']
+        currIter = 0
+        for scores in scoreSet:
+            username = names[currIter][0]
+            plt.bar(yPos + widthChange, scores, width = width, color = colors[currIter],  align='edge', alpha = 0.5, label = username)
+            widthChange += width
+            currIter += 1
+    
+    # create summary graph if > 6 students
+    else:
+        # find avg val for each score
+        avgScores = [float(sum(col))/len(col) for col in zip(*scoreSet)]
+        plt.bar(yPos, avgScores, align = 'center', color='#3fe0d0', alpha = 0.5, label = 'Average Values')
 
     # Make graph
-    labels = [Style(x).name for x in range(len(Style))]
-    yPos = np.arange(len(labels))
-    plt.bar(yPos, scores, align = 'center', alpha = 0.5)
     plt.xticks(yPos, labels)
     plt.ylabel("Score")
-    plt.title("Student " + str(student_id) + " Distribution of Types")
+    plt.title("Student Distribution of Types")
+    plt.legend( bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0. )
 
-    # Make graph
-    labels = [Style(x).name for x in range(len(Style))]
-    yPos = np.arange(len(labels))
-
-    plt.bar(yPos, scores, align = 'center', alpha = 0.5)
-    plt.xticks(yPos, labels)
-    plt.ylabel("Score")
-    plt.title("Student " + str(student_id) + " Distribution of Types")
-
-    name = 'app/assets/images/summary' + str(student_id) + '.png'
+    name = 'app/assets/images/summary.png'
     plt.savefig(name, bbox_inches='tight')
 
 def main():
-    parser = argparse.ArgumentParser(description="Generate graph summarizing a student's answers")
-    parser.add_argument(
-        'student_id', 
-        type=int, 
-        help='Student id for desired student graph',
-    )
-    args = parser.parse_args()
-
-    student_graph(args.student_id)
+    student_graph(sys.argv[1:])
 
 if __name__ == "__main__":
     main()
-    
