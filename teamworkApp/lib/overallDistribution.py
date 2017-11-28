@@ -18,7 +18,6 @@ from evaluateAnswers import Style
 from dbCalls import *
 import sqlite3
 
-DB = 'db/development.sqlite3'
 
 def get_style_tuples():
     """Retrieve all the style data stored in the database"""
