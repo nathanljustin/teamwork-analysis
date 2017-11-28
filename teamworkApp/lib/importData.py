@@ -17,6 +17,7 @@ import dbCalls
 from evaluateAnswers import *
 
 EXPANDED_QUESTIONS = 72
+USERNAME_COL = 80
 TEST = False
 
 
@@ -86,7 +87,7 @@ def process_answer_data(csv_filename):
 
             # the timestamps are saved in the first column of the .csv file
             timestamp = student[0]
-            student_dict[student[-1]] = [timestamp, expanded_responses, enummed_responses]
+            student_dict[student[USERNAME_COL]] = [timestamp, expanded_responses, enummed_responses]
 
         return student_dict
 
@@ -129,7 +130,6 @@ def list_student_data(student_dict):
     """Using data from the csv file given, insertstudent_data finds how many
     students are in the file and places them into the student table"""
     student_to_db = []
-
     for student in student_dict.keys():
         # TODO(Maeve): add functionality to get which team the student is on.
             # This will require more functionality on the teams side
@@ -201,6 +201,7 @@ def list_style_data(student_dict):
         ))
         count += 1
 
+
     return style_to_db
 
 def execute_insert(csv_filename):
@@ -228,7 +229,7 @@ def execute_insert(csv_filename):
 
 def check_inputs(filename, test=False):
     """Checks the inputs and then starts the import process"""
-    if test: 
+    if test:
         global TEST # needed to modify global variable TEST
         TEST = True
 
@@ -246,15 +247,15 @@ def check_inputs(filename, test=False):
     else:
         print("File must be a CSV with extension .csv!")
         raise ValueError("Needs a CSV input")
-        
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Import csv file")
     parser.add_argument(
-        'filepath',  
+        'filepath',
         help='Path to file',
     )
     parser.add_argument(
-        '-t', '--test', 
+        '-t', '--test',
         dest='test',
         action='store_true',
         help='Student id for desired student graph',
