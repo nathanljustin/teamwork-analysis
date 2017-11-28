@@ -11,9 +11,8 @@
 import argparse
 import sqlite3
 import csv
-from datetime import datetime, date, time
 
-import dbCalls
+from dbCalls import *
 from evaluateAnswers import *
 
 EXPANDED_QUESTIONS = 72
@@ -91,40 +90,6 @@ def process_answer_data(csv_filename):
 
         return student_dict
 
-def find_style(expanded_responses):
-    #TODO: This is basically deprecated as we are going to use evaluateAnswers
-        # for this calculation
-    contributor  = 0
-    collaborator = 0
-    communicator = 0
-    challenger   = 0
-    tracker      = 0
-    for resp in expanded_responses:
-        # this pattern is based on the teamwork survey scoring scheme
-        if tracker == 0:
-            contributor  += int(resp[0]) # a
-            collaborator += int(resp[1]) # b
-            communicator += int(resp[2]) # c
-            challenger   += int(resp[3]) # d
-        elif tracker == 1:
-            contributor  += int(resp[3]) # d
-            collaborator += int(resp[0]) # a
-            communicator += int(resp[1]) # b
-            challenger   += int(resp[2]) # c
-        elif tracker == 2:
-            contributor  += int(resp[2]) # c
-            collaborator += int(resp[3]) # d
-            communicator += int(resp[0]) # a
-            challenger   += int(resp[1]) # b
-        elif tracker == 3:
-            contributor  += int(resp[1]) # b
-            collaborator += int(resp[2]) # c
-            communicator += int(resp[3]) # d
-            challenger   += int(resp[0]) # a
-        else:
-            tracker = -1
-        tracker += 1
-    return communicator, collaborator, challenger, contributor
 
 def list_student_data(student_dict):
     """Using data from the csv file given, insertstudent_data finds how many
@@ -154,7 +119,6 @@ def list_answer_data(student_dict):
     # iterate through the students to find the enumerated responses to each
         # question along with student_id and relevant timestamps
     for student in student_dict.keys():
-        now                  = datetime.now().isoformat()
         enummed_responses     = student_dict[student][2]
         question_count       = 0
 
@@ -162,7 +126,6 @@ def list_answer_data(student_dict):
             answer_to_db.append((
                 response,
                 student_dict[student][0],
-                now,
                 primary_keys[count],
                 question_count
             ))
@@ -171,38 +134,38 @@ def list_answer_data(student_dict):
     return answer_to_db
 
 def list_style_data(student_dict):
-    """Given a dictionary of student data, calculate and import style data
-    for each student.
-    Uses find_style to calculate styles."""
-    style_to_db = []
+	"""Given a dictionary of student data, calculate and import style data
+	for each student.
+	Uses find_style to calculate styles."""
+	style_to_db = []
+	# fetch the names of the students from the table
+	conn = sqlite3.connect(DB)
+	c = conn.cursor()
+	# get the primary keys for the students
+	c.execute('SELECT id FROM students;')
+	temp_keys = c.fetchall()
+	conn.commit()
+	conn.close()
 
-    temp_keys = dbCalls.get_all_student_IDs(TEST)
+	primary_keys = [temp_key[0] for temp_key in temp_keys]
 
-    primary_keys = [temp_key[0] for temp_key in temp_keys]
+	count = 0
+	for student in student_dict.keys():
+		expanded_responses = student_dict[student][1]
+		# call find_scores from evaluateAnswers
+		(contributor, collaborator, communicator, challenger) = find_scores(expanded_responses)
+		# created_at   = student_dict[student][0]
+		student_id   = primary_keys[count]
+		style_to_db.append((
+				student_id,
+                communicator,
+				collaborator,
+				challenger,
+                contributor
+			))
+		count += 1
 
-    count = 0
-    for student in student_dict.keys():
-        now               = datetime.now().isoformat()
-        expanded_responses = student_dict[student][1]
-        communicator, collaborator, challenger, contributor = find_style(expanded_responses)
-        # TODO: The commented out line below should be what we use in the
-            # future; however, evaluateAnswers has not been updated for the
-            # new schema (as of the time of writing this 10-28-2017) so we
-            # cannot use it yet
-        # (communicator, collaborator, challenger, contributor) = find_scores(primary_keys[count])
-        created_at   = student_dict[student][0]
-        student_id   = primary_keys[count]
-        style_to_db.append((
-            student_id,
-            communicator,
-            collaborator,
-            challenger,
-            contributor,
-        ))
-        count += 1
-
-
-    return style_to_db
+	return style_to_db
 
 def execute_insert(csv_filename):
     student_dict   = process_answer_data(csv_filename)
@@ -218,10 +181,10 @@ def execute_insert(csv_filename):
     answer_to_db  = list_answer_data(student_dict)
     style_to_db   = list_style_data(student_dict)
     print("Inserting data into 'answers' and 'styles'...")
-
+    # print("answer is ", answer_to_db)
     values = [item[0] for item in answer_to_db]
-    student_ids = [item[3] for item in answer_to_db]
-    questions = [item[4] for item in answer_to_db]
+    student_ids = [item[2] for item in answer_to_db]
+    questions = [item[3] for item in answer_to_db]
     dbCalls.insert_answers(values, student_ids, questions, TEST)
     dbCalls.insert_styles(style_to_db, TEST)
 

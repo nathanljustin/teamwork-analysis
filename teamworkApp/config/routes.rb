@@ -8,5 +8,4 @@ Rails.application.routes.draw do
   get '/python/deleteData/' => 'python#deleteData'
   get '/overallBar/' => 'high_voltage/pages#show', id: 'overallshow'
   get '/importData/' => 'high_voltage/pages#show', id: 'importdata'
-
 end
