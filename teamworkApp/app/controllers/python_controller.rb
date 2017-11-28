@@ -1,6 +1,6 @@
 class PythonController < ApplicationController
     def overallBar
-        system 'python lib/stackedDistribution.py'
+        system 'python lib/overallDistribution.py'
         redirect_to '/overallBar/'
     end
 
