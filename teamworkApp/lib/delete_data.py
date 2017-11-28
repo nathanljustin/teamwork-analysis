@@ -2,7 +2,7 @@
 # Sara McAllister November 17, 2017
 # Last updated: 11-17-2017
 
-# delete all data from database (this is super sketch)
+# delete all data from database and remove generated graphs (this is super sketch)
 
 import os
 
