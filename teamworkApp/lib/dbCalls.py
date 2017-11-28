@@ -68,20 +68,19 @@ def get_students_styles(student_ids, test=False):
         styles = c.execute(sql, student_ids).fetchall()
     return styles
 
-def get_name(student_id, test=False):
+def get_names(student_ids, test=False):
     """
-    Return the name associated with a student's id
+    Return the names associated with student ids
     Args:
-        student_id: A single student's id
+        student_ids: A list of student ids
     Returns:
-        The name of the student as a string
+        The names of the students as a list of strings
     """
+    placeholders = ', '.join('?' for id in student_ids)
+    sql = 'SELECT name FROM students WHERE id IN (%s)' % placeholders
     with dbconnect(test) as c:
-        name = c.execute(
-            'SELECT name FROM students WHERE id =?', 
-            [student_id,],
-        ).fetchall()
-    return name[0][0]
+        names = c.execute(sql, student_ids).fetchall()
+    return names
 
 def get_student_answers(student_id, test=False):
     """
