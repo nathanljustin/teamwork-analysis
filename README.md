@@ -51,11 +51,17 @@ Currently does not work.
 
 * https://stackoverflow.com/questions/2098131/rails-how-to-list-database-tables-objects-using-the-rails-console
 * https://www.justinweiss.com/articles/creating-easy-readable-attributes-with-activerecord-enums/
+* http://www.tomjewett.com/dbdesign/dbdesign.php?page=manymany.php
+* http://guides.rubyonrails.org/v3.2.8/migrations.html
 
 
 ### Python Scripts
 
 * https://docs.python.org/3.6/library/sqlite3.html
+* https://pythonspot.com/en/matplotlib-bar-chart/
+* https://docs.python.org/3/library/contextlib.html
+* https://docs.python.org/3.6/library/unittest.html
+
 
 ### UI
 
@@ -71,3 +77,19 @@ Currently does not work.
 
 * https://github.com/halostatue/rubypython
 * https://mixandgo.com/blog/how-to-use-link_to-in-rails
+* http://effbot.org/pyfaq/how-do-i-create-a-pyc-file.htm
+* https://www.codesd.com/item/using-the-rubypython-gem-in-ruby-on-rails-how-do-you-call-a-python-script-from-the-lib-folder.html
+* http://www.rubydoc.info/gems/rubypython/0.5.1/RubyPython
+* https://github.com/halostatue/rubypython/issues/14
+
+### Student Selection
+* https://github.com/plataformatec/simple_form
+* http://guides.rubyonrails.org/form_helpers.html
+
+### Ruby on Rails
+
+* https://www.tutorialspoint.com/ruby-on-rails/rails-controllers.htm
+* http://guides.rubyonrails.org/action_controller_overview.html#methods-and-actions
+* http://www.mattmorgante.com/technology/csv
+* http://guides.rubyonrails.org/routing.html
+* http://guides.rubyonrails.org/form_helpers.html#uploading-files

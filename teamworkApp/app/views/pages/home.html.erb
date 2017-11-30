@@ -7,37 +7,29 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<div style='padding-top: 50px'>
   <center><h1> Teamwork Analysis </h1></center>
+</div>
     <style>body{padding-top:70px;}</style>
     <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <center> </center>
+
+      <div class="row" style="padding: 50px">
+        <% if !flash.empty? %>
+          <div class="alert alert-info"><center><%= flash[:notice] %></center></div>
+        <% end %>
+        <div class="col-md-6">
+            <div align="right"><h4> Import Data </h4></div>
+        </div>
+        <div class="col-md-6">
+            <div align="left"><%= render 'pages/importdatashow.html.erb'%></div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-lg-12">
-          <center> </center>
-        </div>
+      <div class="row" style="padding: 0px">
+        <center>
+          <a href="python/deleteData" class="btn btn-danger" role="button">Remove All Data <br/>(Data will be lost)</a>
+        </center>
       </div>
-      <div class="row">
-        <div class="col-lg-12">
-          <center> </center>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4"><center><a href="#" class="btn btn-info" role="button">Overall Distribution</a></center></div>
-        <div class="col-md-4"><center><a href="#" class="btn btn-info" role="button">Create Teams</a></center></div>
-        <div class="col-md-4"><center><a href="#" class="btn btn-info" role="button">Individual Statistics</a></center></div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <center>
-            <%= image_tag('summary1.png') %>
-          </center>
-        </div>
+      <div class="row" style="padding: 50px">
       </div>
     </div>
   </div>
