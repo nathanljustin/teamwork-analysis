@@ -1,3 +1,7 @@
+############################
+##      Deprecated?      ##
+###########################
+
 def getType(scores):
     """ Find student's type(s) based on survey answers
     """

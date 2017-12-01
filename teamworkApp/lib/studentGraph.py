@@ -1,4 +1,17 @@
-import argparse 
+# muddersOnRails()
+#
+#
+
+# creates a histogram that shows the scores for each style of the student
+# selected on the webpage. Up to 6 students can be selected with all of their
+# information individualized, but beyond six, only the average is shown because
+# of the cluttered nature of the graph
+
+# resources:
+# https://matplotlib.org/examples/pylab_examples/bar_stacked.html
+# https://chrisalbon.com/python/matplotlib_grouped_bar_plot.html
+
+import argparse
 import matplotlib.pyplot as plt
 import numpy as np
 import sys
@@ -8,7 +21,12 @@ from evaluateAnswers import Style
 
 
 def student_graph(student_ids):
-    """Returns a path to where the student's graph is saved"""
+    """
+    Returns a path to where the student's generated graph is saved
+
+    Given the student_ids, create a grouped bar graph of the students' scores
+    and return the path to that .png to be displayed on the webpage.
+    """
 
     labels = [Style(x).name for x in range(len(Style))]
     names = dbCalls.get_names(student_ids)
@@ -32,7 +50,7 @@ def student_graph(student_ids):
             plt.bar(yPos + widthChange, scores, width = width, color = colors[currIter],  align='edge', alpha = 0.5, label = username)
             widthChange += width
             currIter += 1
-    
+
     # create summary graph if > 6 students
     else:
         # find avg val for each score

@@ -1,6 +1,6 @@
 # muddersOnRails()
 # Maeve Murphy October 12, 2017
-# Last updated: 11-9-2017
+# Last updated: 11-14-2017
 
 # imports data from the .csv file holding responses from the teamwork survey
 
@@ -21,13 +21,19 @@ TEST = False
 
 
 def get_answer(answer_num):
+    """
+    Given answer number find appropriate response according to Answer_Value
+    """
     for ans in range(len(Answer_Value)):
         if Answer_Value(ans).name == answer_num:
             return ans
     raise ValueError("Invalid response")
 
 def process_answer_data(csv_filename):
-    """Given the Teamwork Survey csv file, process_answer_data will extract the
+    """
+    Process data from temawork survey .csv
+
+    Given the Teamwork Survey csv file, process_answer_data will extract the
     pertinent information and populate a student dictionary with it.
     This processing requires very specifically formatted .csv files and it
     assumes they come from the results of the Teamwork Survey sent out by
@@ -92,22 +98,31 @@ def process_answer_data(csv_filename):
 
 
 def list_student_data(student_dict):
-    """Using data from the csv file given, insertstudent_data finds how many
-    students are in the file and places them into the student table"""
+    """
+    Create list of student_ids to go in student table
+
+    Using data from the csv file given, insertstudent_data finds how many
+    students are in the file and creates a list to enter them into
+    the student table
+    inputs: student_dicts from process_answer_data
+    output: list of student info to go in students (ids)
+    """
     student_to_db = []
     for student in student_dict.keys():
-        # TODO(Maeve): add functionality to get which team the student is on.
+        # TODO(Future work): add functionality to get which team the student is on.
             # This will require more functionality on the teams side
         # currently name and username are the same
         student_to_db.append((student, student))
     return student_to_db
 
 def list_answer_data(student_dict):
-    """Return the list of answer data corresponding to each student within
-    student_dict.
+    """
+    Return the list of answer data corresponding to each student in student_dict
+
     output: answer_to_db is a list of tuples holding information corresponding
         to the columns within the answers table that is inserted in a future
-        function."""
+        function.
+    """
     # fetch the names of the students from the table
 
     temp_keys = dbCalls.get_all_student_IDs(TEST)
@@ -134,9 +149,12 @@ def list_answer_data(student_dict):
     return answer_to_db
 
 def list_style_data(student_dict):
-	"""Given a dictionary of student data, calculate and import style data
-	for each student.
-	Uses find_style to calculate styles."""
+	"""
+    Find student styles and format them into a list for the database
+
+    Given a dictionary of student data, calculate and import style data
+	for each student. Uses find_style to calculate styles.
+    """
 	style_to_db = []
 	# fetch the names of the students from the table
 	conn = sqlite3.connect(DB)
@@ -168,6 +186,12 @@ def list_style_data(student_dict):
 	return style_to_db
 
 def execute_insert(csv_filename):
+    """
+    Given csv file perform all functions to process data for the database.
+
+    These functions are process_answer_data, list_student_data, list_answer_data,
+    and list_style_data. The lists are then all inserted into the database.
+    """
     student_dict   = process_answer_data(csv_filename)
     student_to_db = list_student_data(student_dict)
     print("Inserting .csv information into 'students'...")
@@ -191,7 +215,7 @@ def execute_insert(csv_filename):
     print("Success: Data inserted into 3 tables!")
 
 def check_inputs(filename, test=False):
-    """Checks the inputs and then starts the import process"""
+    """ Checks the inputs and then starts the import process """
     if test:
         global TEST # needed to modify global variable TEST
         TEST = True

@@ -1,3 +1,19 @@
+############################
+##      Deprecated?      ##
+###########################
+
+
+
+# muddersOnRails()
+#
+#
+
+#
+
+# resources:
+# https://www.tutorialspoint.com/sqlite/sqlite_select_query.htm
+# https://docs.python.org/2/library/sqlite3.html
+
 import matplotlib.pyplot as plt
 import numpy as np
 

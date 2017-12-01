@@ -27,14 +27,18 @@ def get_style_tuples():
     return style_data
 
 def tally_nth(style_data, n):
-    """given a tuple of 4 scores: (communicator, collaborator,
+    """
+    Calculate prominance of each score for students in the database
+
+    Given a tuple of 4 scores: (communicator, collaborator,
     challenger, contributor), return tallies for how many
     students in the DB have each as their nth order prominence of style.
     For example, let n = 1 and get back the highest order prominence (primary)
         style
     NOTE: ties are settled such that they are counted in both categories of the
     tie. For example, if the student's style was [45, 43, 43, 49] collaborator
-    would be 2nd and 3rd and challenger would *also* be 2nd and 3rd"""
+    would be 2nd and 3rd and challenger would *also* be 2nd and 3rd
+    """
     # communicator, collaborator, challenger, contributor
     tallies = [0,0,0,0]
     for student in style_data:
@@ -48,9 +52,13 @@ def tally_nth(style_data, n):
 
 
 def make_adjacent_graph(primaries, secondaries, tertiaries, quarternaries):
-    """Given all the prominences of styles from the style table in the
+    """
+    Make grouped bar graph of prominent styles for all students
+
+    Given all the prominences of styles from the style table in the
         database, create a adjacent bar graph to aggregate the information
-        into one place by stacknig them in a histogram."""
+        into one place by stacknig them in a histogram.
+    """
     x_labels = [Style(x).name for x in range(len(Style))]
     print(x_labels,primaries,secondaries,tertiaries,quarternaries)
 
