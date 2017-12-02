@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   post '/student_graph/show' => 'student_graph#graph'
   post '/python/importData/' => 'python#importData'
   get '/python/overallBar/' => 'python#overallBar'
-  get '/python/deleteData/' => 'python#deleteData'
+  post '/python/deleteData/' => 'python#deleteData'
   get '/overallBar/' => 'high_voltage/pages#show', id: 'overallshow'
   get '/importData/' => 'high_voltage/pages#show', id: 'importdata'
 end
