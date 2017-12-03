@@ -52,7 +52,6 @@ def make_adjacent_graph(primaries, secondaries, tertiaries, quarternaries):
         database, create a adjacent bar graph to aggregate the information
         into one place by stacknig them in a histogram."""
     x_labels = [Style(x).name for x in range(len(Style))]
-    print(x_labels,primaries,secondaries,tertiaries,quarternaries)
 
     raw_data = {'styles': ['Communicator', 'Collaborator','Challenger', 'Contributor'],
         'primary': primaries,
@@ -121,7 +120,6 @@ def make_adjacent_graph(primaries, secondaries, tertiaries, quarternaries):
     maxHeight = max(max(df['primary']), max(df['secondary']), max(df['tertiary']), max(df['quarternary'])) + 1
     if maxHeight > 30:
         maxHeight += 2
-    print("max y is", maxHeight)
     plt.ylim([0, maxHeight])#max(df['primary'], df['secondary'], df['tertiary'], df['quarternary']) + 1] )
 
     # Adding the legend and showing the plot

@@ -40,5 +40,20 @@ class ImportFlowTest < ActionDispatch::IntegrationTest
   end
 
   test "can delete data" do 
+    # start on the home page
+    get "/"
+    assert_select "h1", "Teamwork Analysis"
+
+    # test post method with non csv input
+    post '/python/deleteData'
+
+    # check correct redirection
+    assert_response :redirect
+    follow_redirect!
+    assert_response :success
+    assert_select "h1", "Teamwork Analysis"
+
+    # check for flash notice
+    assert_equal 'Deleted data successfully.', flash[:notice]
   end
 end
