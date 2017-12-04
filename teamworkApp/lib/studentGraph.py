@@ -20,6 +20,7 @@ def student_graph(student_ids):
     # Get the scores needed
     assert(len(dbData) != 0), "Cannot find student data."
 
+
     # create summary graph if > 6 students
     # else:
         # find avg val for each score
@@ -34,7 +35,7 @@ def student_graph(student_ids):
 
     name = 'app/assets/images/summary.png'
     plt.savefig(name, bbox_inches='tight')
-
+    plt.cla()
 
     # create split bar graph if <= 6 students
     if len(scoreSet) <= 6:
@@ -56,6 +57,7 @@ def student_graph(student_ids):
 
         name1 = 'app/assets/images/summary1.png'
         plt.savefig(name1, bbox_inches='tight')
+
 
 
 
