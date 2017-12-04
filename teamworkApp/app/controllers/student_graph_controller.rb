@@ -19,15 +19,16 @@ class StudentGraphController < ApplicationController
         end
         @selected = temp
 
-        # Check if summary graph has been created or not
-        if File.exist?(Rails.root.join('app', 'assets', 'images', 'summary1.png'))
-            @image1 = 'summary1.png'
-        else
-            @image1 = ''
-        end
+
         # Check if summary graph has been created or not
         if File.exist?(Rails.root.join('app', 'assets', 'images', 'summary.png'))
             @image = 'summary.png'
+            # Check if summary graph has been created or not
+            if File.exist?(Rails.root.join('app', 'assets', 'images', 'summary1.png'))
+                @image1 = 'summary1.png'
+            else
+                @image1 = ''
+            end
         else
             @image = ''
         end
