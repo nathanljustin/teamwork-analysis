@@ -1,4 +1,4 @@
-import argparse 
+import argparse
 import matplotlib.pyplot as plt
 import numpy as np
 import sys
@@ -20,6 +20,22 @@ def student_graph(student_ids):
     # Get the scores needed
     assert(len(dbData) != 0), "Cannot find student data."
 
+    # create summary graph if > 6 students
+    # else:
+        # find avg val for each score
+    avgScores = [float(sum(col))/len(col) for col in zip(*scoreSet)]
+    plt.bar(yPos, avgScores, align = 'center', color='#3fe0d0', alpha = 0.5, label = 'Average Values')
+
+    # Make graph
+    plt.xticks(yPos, labels)
+    plt.ylabel("Score")
+    plt.title("Average Student Distribution of Types")
+    plt.legend( bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0. )
+
+    name = 'app/assets/images/summary.png'
+    plt.savefig(name, bbox_inches='tight')
+
+
     # create split bar graph if <= 6 students
     if len(scoreSet) <= 6:
         # change for each set of bars
@@ -32,21 +48,16 @@ def student_graph(student_ids):
             plt.bar(yPos + widthChange, scores, width = width, color = colors[currIter],  align='edge', alpha = 0.5, label = username)
             widthChange += width
             currIter += 1
-    
-    # create summary graph if > 6 students
-    else:
-        # find avg val for each score
-        avgScores = [float(sum(col))/len(col) for col in zip(*scoreSet)]
-        plt.bar(yPos, avgScores, align = 'center', color='#3fe0d0', alpha = 0.5, label = 'Average Values')
+        # Make graph
+        plt.xticks(yPos, labels)
+        plt.ylabel("Score")
+        plt.title("Student Distribution of Types")
+        plt.legend( bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0. )
 
-    # Make graph
-    plt.xticks(yPos, labels)
-    plt.ylabel("Score")
-    plt.title("Student Distribution of Types")
-    plt.legend( bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0. )
+        name1 = 'app/assets/images/summary1.png'
+        plt.savefig(name1, bbox_inches='tight')
 
-    name = 'app/assets/images/summary.png'
-    plt.savefig(name, bbox_inches='tight')
+
 
 def main():
     student_graph(sys.argv[1:])
