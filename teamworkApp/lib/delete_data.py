@@ -12,7 +12,6 @@ summary_file = 'app/assets/images/summary.png'
 overall_file = 'app/assets/images/overall.png'
 
 def main():
-    print('Deleting everything from students, styles, and answers.')
     dbCalls.remove_all()
 
     # remove both summary and overall picture
