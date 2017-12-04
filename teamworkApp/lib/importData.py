@@ -161,25 +161,22 @@ def list_style_data(student_dict, students):
 def execute_insert(csv_filename):
     student_dict   = process_answer_data(csv_filename)
     student_to_db = list_student_data(student_dict)
-    print("Inserting .csv information into 'students'...")
 
     # insert students and return list of (student_id, student_name)
     students = dbCalls.insert_students(student_to_db, TEST)
 
-    print("Success.")
     # answer and style depend on information being stored in students so we
         # can only call list_answer_data and list_student_data after
         # list_student_data's information has been inserted
     answer_to_db  = list_answer_data(student_dict, students)
     style_to_db   = list_style_data(student_dict, students)
-    print("Inserting data into 'answers' and 'styles'...")
+
     values = [item[0] for item in answer_to_db]
     student_ids = [item[2] for item in answer_to_db]
     questions = [item[3] for item in answer_to_db]
     dbCalls.insert_answers(values, student_ids, questions, TEST)
     dbCalls.insert_styles(style_to_db, TEST)
 
-    print("Success: Data inserted into 3 tables!")
 
 def check_inputs(filename, test=False):
     """Checks the inputs and then starts the import process"""
@@ -188,7 +185,6 @@ def check_inputs(filename, test=False):
         TEST = True
 
     # TODO: remove this and other print statements when moving to Ruby
-    print("Inserting data")
 
     # make sure the file is a csv
     if filename[-4:] == ".csv":
@@ -196,10 +192,8 @@ def check_inputs(filename, test=False):
         try:
             execute_insert(filename)
         except FileNotFoundError as error:
-            print("File must have an accessible path!")
             raise error
     else:
-        print("File must be a CSV with extension .csv!")
         raise ValueError("Needs a CSV input")
 
 if __name__ == "__main__":
