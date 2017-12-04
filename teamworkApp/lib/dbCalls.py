@@ -147,6 +147,10 @@ def insert_students(students, test=False):
             'INSERT INTO students (name, created_at, updated_at, username) VALUES (?, current_time, current_time, ?);', 
             students,
         )
+        student_ids = c.execute(
+            'SELECT id, name FROM students order by id DESC limit %d' % len(students)
+        ).fetchall()
+    return student_ids[::-1]
 
 def insert_answers(values, student_ids, questions, test=False):
     """
