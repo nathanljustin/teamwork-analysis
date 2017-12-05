@@ -9,7 +9,7 @@ from evaluateAnswers import Style
 
 def student_graph(student_ids):
     """Returns a path to where the student's graph is saved"""
-    # remove both summary and overall picture
+    # remove both overall picture
     try:
         os.remove('app/assets/images/summary1.png')
     except OSError:
