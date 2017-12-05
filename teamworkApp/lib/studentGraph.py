@@ -9,11 +9,11 @@ from evaluateAnswers import Style
 
 def student_graph(student_ids):
     """Returns a path to where the student's graph is saved"""
-    # # remove both summary and overall picture
-    # try:
-    #     os.remove('teamworkApp/app/assets/images/summary1.png')
-    # except OSError:
-    #     pass
+    # remove both summary and overall picture
+    try:
+        os.remove('app/assets/images/summary1.png')
+    except OSError:
+        pass
 
     labels = [Style(x).name for x in range(len(Style))]
     names = dbCalls.get_names(student_ids)

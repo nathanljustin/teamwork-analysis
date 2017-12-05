@@ -3,7 +3,7 @@ class StudentGraphController < ApplicationController
         # @students: Stores all the student objects
         # @selected: Stores whether the student was selected previously or not
         # @image: Stores the image name of the graph (if available)
-
+        @image1 = ''
         @students = Student.all
 
         # Precheck boxes based on  what was previously checked
@@ -23,14 +23,15 @@ class StudentGraphController < ApplicationController
         # Check if summary graph has been created or not
         if File.exist?(Rails.root.join('app', 'assets', 'images', 'summary.png'))
             @image = 'summary.png'
-            # Check if summary graph has been created or not
-            if File.exist?(Rails.root.join('app', 'assets', 'images', 'summary1.png'))
-                @image1 = 'summary1.png'
-            else
-                @image1 = ''
-            end
         else
             @image = ''
+        end
+
+        # Check if summary graph has been created or not
+        if File.exist?(Rails.root.join('app', 'assets', 'images', 'summary1.png'))
+            @image1 = 'summary1.png'
+        else
+            @image1 = ''
         end
 
     end
