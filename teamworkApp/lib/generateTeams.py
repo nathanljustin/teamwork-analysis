@@ -1,11 +1,6 @@
 # muddersOnRails()
 #
-# Last updated:
-# Collaborators:
-#
-# Overview:
-#
-# resources:
+
 
 import argparse
 import random
