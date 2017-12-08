@@ -15,7 +15,7 @@
 
 This project is a teamwork analysis web app. It is designed to display results from the Parker Team Player Survey (read more about that [here](https://www.creativeorgdesign.com/tests_page.php?id=185)), which scores people as Contributors, Collaborators, Challengers, and Communicators. One can import the results from [this](https://docs.google.com/forms/d/1px6yEtC9zEG469OELr_1apL2iTUqwwDRYkoirncgVBI/edit) survey into the website. Once they have data in the database, the user can view an overall summary. This displays the primary, secondary, tertiary, and quaternary types for each student in the database. The user can also select an arbitrary number of students and view their scores for each of the four cateogries. 
 
-## Contributers
+## Contributors
 
 * Nathan Justin 
 * Sara McAllister
@@ -24,16 +24,18 @@ This project is a teamwork analysis web app. It is designed to display results f
 
 ## Architecture
 
-All data processing is completed using Python 3. Ruby will use the Python scripts to display the resulting graphs on web pages, titled "Overall Distribution" and "Individual Statistics."
+All data processing is completed using Python 3. We use numpy with matplotlib to create the graphs. Our database interaction is also managed with python, and can be found in the `lib/dbCalls.py`. Ruby will use the Python scripts to display the resulting graphs on web pages, titled "Overall Distribution" and "Individual Statistics."
 
 ### Database Design
 
 The database is implemented using SQLite, and follows this structure:
+![Database Design](dbDesign.png)
+Currently, the app uses the Student, Answers, and Style tables. The remaining tables were built into the database for future functionality and use.
 
 ### Prerequisites
 
 This application requires:
-* Python 3.x
+* Python 3.x (download [here](https://anaconda.org/anaconda/python))
 * Rails 5 with Ruby 2.2 or higher
     - Can be installed by following [these](http://railsapps.github.io/installing-rails.html) instructions
 * Git
@@ -45,16 +47,17 @@ This application requires:
 ## Installation
 
 To use this app, you must first download the files. To do so, open up a terminal on your personal machine, navigate to the folder in which you'd like the files to exist, and run these commands
-- `git clone https://github.com/nathanljustin/teamwork-analysis.git`
-- `cd teamworkApp`
-- `rails db:migrate`
-- `rails s`
+`git clone https://github.com/nathanljustin/teamwork-analysis.git
+cd teamworkApp
+rails db:migrate
+bundle install
+rails s`
 
 Then go to your web browser of choice, and navigate to `localhost:3000`. You are now free to use the teamwork analysis app!
 
 ## Functionality
 
-* Import Data: The foundation of our Teamwork Survey web app is the data, so we must have an easy way to put data in the database. When a user starts using the app, the database will be empty. The user’s only option will be to import data from a .csv file into the database, via a button on the main page. The web app assumes that the .csv file is set up such that it was an output from the [Teamwork Survey](https://docs.google.com/forms/d/1px6yEtC9zEG469OELr_1apL2iTUqwwDRYkoirncgVBI/edit) sent out by the muddersOnRails team. 
+* Import Data: The foundation of our Teamwork Survey web app is the data, so we must have an easy way to put data in the database. Upon first loading the web app, the database will be empty. The user’s only option will be to import data from a .csv file into the database, via a button on the main page. The web app assumes that the .csv file is set up such that it was an output from the [Teamwork Survey](https://docs.google.com/forms/d/1px6yEtC9zEG469OELr_1apL2iTUqwwDRYkoirncgVBI/edit) sent out by the muddersOnRails team. 
 
 * Overall Distribution: Once students have been loaded into the database, a user can then examine the overall distribution of scores among them. Upon clicking “Overall distribution,” Python will generate a graph that Ruby will subsequently display for the user. The primary, secondary, tertiary, and quaternary types are displayed for each of the students in a split bar graph.
 
