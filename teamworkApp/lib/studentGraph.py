@@ -1,3 +1,16 @@
+# muddersOnRails()
+#
+#
+
+# creates a histogram that shows the scores for each style of the student
+# selected on the webpage. Up to 6 students can be selected with all of their
+# information individualized, but beyond six, only the average is shown because
+# of the cluttered nature of the graph
+
+# resources:
+# https://matplotlib.org/examples/pylab_examples/bar_stacked.html
+# https://chrisalbon.com/python/matplotlib_grouped_bar_plot.html
+
 import argparse
 import matplotlib.pyplot as plt
 import numpy as np
@@ -88,9 +101,6 @@ def student_graph(student_ids):
     # create split bar graph if <= 6 students
     if len(score_set) <= 6:
         make_grouped(score_set, y_pos, labels, names)
-
-
-
 
 
 def main():
