@@ -149,7 +149,7 @@ def list_answer_data(student_dict):
     return answer_to_db
 
 def list_style_data(student_dict):
-	"""
+    """
     Find student styles and format them into a list for the database
 
     Given a dictionary of student data, calculate and import style data
