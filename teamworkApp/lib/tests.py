@@ -25,7 +25,7 @@ import dbCalls
 class TestDBCallsCase(unittest.TestCase):
 
     def setUp(self):
-        importData.check_inputs('test/test_spreadsheet.csv', test=True)
+        importData.check_inputs('test/test_spreadsheet(1).csv', test=True)
 
     def test_import_data(self):
         # query for all inserted data
@@ -37,12 +37,12 @@ class TestDBCallsCase(unittest.TestCase):
         # check correct number of students
         self.assertEqual(3, len(students))        
         # check that student names are correct
-        self.assertEqual(sorted([student[1] for student in students]), sorted(['kfake','mcmurphy','jdoe']))
+        self.assertEqual(sorted([student[1] for student in students]), sorted(['jdoe','mcmurphy','rsmith']))
         # check that styles are correct
-        self.assertEqual(sorted([style[5] for style in styles]), sorted([36, 34, 34]))
-        self.assertEqual(sorted([style[3] for style in styles]), sorted([30, 41, 41]))
-        self.assertEqual(sorted([style[2] for style in styles]), sorted([36, 36, 43]))
-        self.assertEqual(sorted([style[4] for style in styles]), sorted([39, 39, 41]))
+        self.assertEqual(sorted([style[5] for style in styles]), sorted([49, 49, 50]))
+        self.assertEqual(sorted([style[3] for style in styles]), sorted([43, 43, 43]))
+        self.assertEqual(sorted([style[2] for style in styles]), sorted([43, 48, 43]))
+        self.assertEqual(sorted([style[4] for style in styles]), sorted([45, 39, 45]))
 
         self.assertEqual(18, len(answers))
       

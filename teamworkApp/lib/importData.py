@@ -102,7 +102,7 @@ def list_student_data(student_dict):
         student_to_db.append((student, student))
     return student_to_db
 
-def list_answer_data(student_dict):
+def list_answer_data(student_dict, students):
     """Return the list of answer data corresponding to each student within
     student_dict.
     output: answer_to_db is a list of tuples holding information corresponding
@@ -110,9 +110,8 @@ def list_answer_data(student_dict):
         function."""
     # fetch the names of the students from the table
 
-    temp_keys = dbCalls.get_all_student_IDs(TEST)
+    primary_keys = [student[0] for student in students]
 
-    primary_keys  = [temp_key[0] for temp_key in temp_keys]
     answer_to_db = []
     count = 0
 
@@ -133,21 +132,13 @@ def list_answer_data(student_dict):
         count += 1
     return answer_to_db
 
-def list_style_data(student_dict):
+def list_style_data(student_dict, students):
 	"""Given a dictionary of student data, calculate and import style data
 	for each student.
 	Uses find_style to calculate styles."""
 	style_to_db = []
-	# fetch the names of the students from the table
-	conn = sqlite3.connect(DB)
-	c = conn.cursor()
-	# get the primary keys for the students
-	c.execute('SELECT id FROM students;')
-	temp_keys = c.fetchall()
-	conn.commit()
-	conn.close()
 
-	primary_keys = [temp_key[0] for temp_key in temp_keys]
+	primary_keys = [student[0] for student in students]
 
 	count = 0
 	for student in student_dict.keys():
@@ -171,14 +162,15 @@ def execute_insert(csv_filename):
     student_dict   = process_answer_data(csv_filename)
     student_to_db = list_student_data(student_dict)
 
-    dbCalls.insert_students(student_to_db, TEST)
+    # insert students and return list of (student_id, student_name)
+    students = dbCalls.insert_students(student_to_db, TEST)
 
     # answer and style depend on information being stored in students so we
         # can only call list_answer_data and list_student_data after
         # list_student_data's information has been inserted
-    answer_to_db  = list_answer_data(student_dict)
-    style_to_db   = list_style_data(student_dict)
-    # print("answer is ", answer_to_db)
+    answer_to_db  = list_answer_data(student_dict, students)
+    style_to_db   = list_style_data(student_dict, students)
+
     values = [item[0] for item in answer_to_db]
     student_ids = [item[2] for item in answer_to_db]
     questions = [item[3] for item in answer_to_db]
