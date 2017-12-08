@@ -3,7 +3,6 @@ class StudentGraphController < ApplicationController
         # @students: Stores all the student objects
         # @selected: Stores whether the student was selected previously or not
         # @image: Stores the image name of the graph (if available)
-
         @students = Student.all
 
         # Precheck boxes based on  what was previously checked
@@ -19,12 +18,21 @@ class StudentGraphController < ApplicationController
         end
         @selected = temp
 
+
         # Check if summary graph has been created or not
-        if File.exist?(Rails.root.join('app', 'assets', 'images', 'summary.png'))
-            @image = 'summary.png'
+        if File.exist?(Rails.root.join('app', 'assets', 'images', 'average.png'))
+            @image = 'average.png'
         else
             @image = ''
         end
+
+        # Check if summary graph has been created or not
+        if File.exist?(Rails.root.join('app', 'assets', 'images', 'grouped.png'))
+            @image1 = 'grouped.png'
+        else
+            @image1 = ''
+        end
+
     end
 
     def graph
@@ -38,10 +46,10 @@ class StudentGraphController < ApplicationController
             end
 
             # Call the python function for the graph
-            a = params[:selection][:selected].join(" ")        
+            a = params[:selection][:selected].join(" ")
             system 'python lib/studentGraph.py' + a
         end
 
-        redirect_to student_graph_show_path(:id => c) 
+        redirect_to student_graph_show_path(:id => c)
     end
 end

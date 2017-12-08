@@ -1,3 +1,10 @@
+# muddersOnRails()
+# Sara McAllister November 5, 2017
+# Last updated: 11-16-2017
+
+#Collaborators: Sara McAllister and Maeve Murphy
+# library for SQLite database calls for teamwork analysis app
+
 from enum import IntEnum
 
 import dbCalls
