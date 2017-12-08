@@ -29,7 +29,7 @@ All data processing is completed using Python 3. We use numpy with matplotlib to
 ### Database Design
 
 The database is implemented using SQLite, and follows this structure:
-![Database Design](dbDesign.png)
+![Database Design](dbDesign.png = 515x681)
 Currently, the app uses the Student, Answers, and Style tables. The remaining tables were built into the database for future functionality and use.
 
 ### Prerequisites
