@@ -3,7 +3,6 @@ class StudentGraphController < ApplicationController
         # @students: Stores all the student objects
         # @selected: Stores whether the student was selected previously or not
         # @image: Stores the image name of the graph (if available)
-        @image1 = ''
         @students = Student.all
 
         # Precheck boxes based on  what was previously checked
