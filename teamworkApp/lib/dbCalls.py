@@ -122,7 +122,7 @@ def get_all_student_IDs(test=False):
 
 def insert_student_team_pairs(student_and_team_ids, test=False):
     """
-    Insert a list of (student_id, team_id pairs) into database
+    Insert a list of (student_id, team_id) pairs into database
 
     Args:
         student_and_team_ids: list of (student_id, team_id) pairs
