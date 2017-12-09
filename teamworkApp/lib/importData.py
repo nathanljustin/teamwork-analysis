@@ -115,7 +115,7 @@ def list_student_data(student_dict):
         student_to_db.append((student, student))
     return student_to_db
 
-def list_answer_data(student_dict):
+def list_answer_data(student_dict, students):
     """
     Return the list of answer data corresponding to each student in student_dict
     output: answer_to_db is a list of tuples holding information corresponding
@@ -146,34 +146,34 @@ def list_answer_data(student_dict):
         count += 1
     return answer_to_db
 
-def list_style_data(student_dict):
+def list_style_data(student_dict, students):
     """
     Find student styles and format them into a list for the database
 
     Given a dictionary of student data, calculate and import style data
-	  for each student. Uses find_style to calculate styles.
+      for each student. Uses find_style to calculate styles.
     """
-	style_to_db = []
+    style_to_db = []
 
-	primary_keys = [student[0] for student in students]
+    primary_keys = [student[0] for student in students]
 
-	count = 0
-	for student in student_dict.keys():
-		expanded_responses = student_dict[student][1]
-		# call find_scores from evaluateAnswers
-		(contributor, collaborator, communicator, challenger) = find_scores(expanded_responses)
-		# created_at   = student_dict[student][0]
-		student_id   = primary_keys[count]
-		style_to_db.append((
-				student_id,
+    count = 0
+    for student in student_dict.keys():
+        expanded_responses = student_dict[student][1]
+        # call find_scores from evaluateAnswers
+        (contributor, collaborator, communicator, challenger) = find_scores(expanded_responses)
+        # created_at   = student_dict[student][0]
+        student_id   = primary_keys[count]
+        style_to_db.append((
+                student_id,
                 communicator,
-				collaborator,
-				challenger,
+                collaborator,
+                challenger,
                 contributor
-			))
-		count += 1
+            ))
+        count += 1
 
-	return style_to_db
+    return style_to_db
 
 def execute_insert(csv_filename):
     """
