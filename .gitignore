@@ -1,1 +1,6 @@
 .DS_Store
+teamworkApp/db/*.sqlite3
+teamworkApp/app/assets/images/*
+teamworkApp/lib/__pycache__*
+teamworkApp/log/*
+teamworkApp/tmp/*
