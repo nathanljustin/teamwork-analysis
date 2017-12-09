@@ -4,3 +4,4 @@ teamworkApp/app/assets/images/*
 teamworkApp/lib/__pycache__*
 teamworkApp/log/*
 teamworkApp/tmp/*
+*.pyc
