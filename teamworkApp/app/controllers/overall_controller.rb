@@ -12,6 +12,6 @@ class OverallController < ApplicationController
     end
 
     def graph
-        system 'python3 lib/overallDistribution.py'
+        system 'python lib/overallDistribution.py'
     end
 end
