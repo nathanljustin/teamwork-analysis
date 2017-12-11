@@ -36,7 +36,8 @@ Currently, the app uses the Student, Answers, and Style tables. The remaining ta
 ### Prerequisites
 
 This application requires:
-* Python 3.x (download [here](https://anaconda.org/anaconda/python))
+* Python 3.x (download [here](https://anaconda.org/anaconda/python));
+    - specifically requires ImportEnum, matplotlib, and numpy libraries. The program will not work without these.
 * Rails 5 with Ruby 2.2 or higher
     - Can be installed by following [these](http://railsapps.github.io/installing-rails.html) instructions
 * Git
@@ -47,12 +48,12 @@ This application requires:
 
 ## Installation
 
-To use this app, you must first download the files. To do so, open up a terminal on your personal machine, navigate to the folder in which you'd like the files to exist, and run these commands
-`git clone https://github.com/nathanljustin/teamwork-analysis.git
-cd teamworkApp
-rails db:migrate
-bundle install
-rails s`
+To use this app, you must first download the files. To do so, open up a terminal on your personal machine, navigate to the folder in which you'd like the files to exist, and run these commands <br>
+`git clone https://github.com/nathanljustin/teamwork-analysis.git` <br>
+`cd teamworkApp` <br>
+`rails db:migrate` <br>
+`bundle install` <br>
+`rails s`
 
 Then go to your web browser of choice, and navigate to `localhost:3000`. You are now free to use the teamwork analysis app!
 
