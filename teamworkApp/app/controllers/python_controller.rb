@@ -1,9 +1,4 @@
 class PythonController < ApplicationController
-    def overallBar
-        system 'python3 lib/overallDistribution.py'
-        redirect_to '/overallBar/'
-    end
-
     def importData
         path = params[:file].path
         # call the python command without printing error messages
