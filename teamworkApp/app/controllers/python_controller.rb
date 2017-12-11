@@ -1,13 +1,8 @@
 class PythonController < ApplicationController
-    def overallBar
-        system 'python lib/overallDistribution.py'
-        redirect_to '/overallBar/'
-    end
-
     def importData
         path = params[:file].path
         # call the python command without printing error messages
-        full_call = 'python lib/importData.py ' + path 
+        full_call = 'python3 lib/importData.py ' + path 
         if system full_call
             flash[:notice] = 'Import was successful.'
         else
@@ -17,7 +12,7 @@ class PythonController < ApplicationController
     end
 
     def deleteData
-        if system 'python lib/delete_data.py'
+        if system 'python3 lib/delete_data.py'
             flash[:notice] = 'Deleted data successfully.'
         end
         redirect_to '/'
